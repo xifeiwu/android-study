@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity{
@@ -14,6 +15,7 @@ public class MainActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        this.setContentView(R.layout.main);
         activityStates("onCreate");
     }
 
@@ -61,11 +63,11 @@ public class MainActivity extends Activity{
 
     private Logger logger = Logger.getLogger(MainActivity.class.getName());
     private void activityStates(String state){
-        Toast.makeText(this, state, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, MainActivity.class.getName() + " - " + state, Toast.LENGTH_LONG).show();
         logger.info(state);
     }
     
-    private void startWebviewActivity(){
+    public void startWebviewActivity(View view){
         Intent intent = new Intent(this, WebViewActivity.class);
         startActivity(intent);
     }
