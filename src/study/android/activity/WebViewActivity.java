@@ -1,5 +1,7 @@
 package study.android.activity;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Logger;
 
 
@@ -8,10 +10,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
+import android.view.Window;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -26,6 +30,7 @@ public class WebViewActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.webview);
         init();//执行初始化函数
         handler=new Handler(){
@@ -46,7 +51,26 @@ public class WebViewActivity extends Activity{
               super.handleMessage(msg);
             }
         };
-        loadurl(wv,"file:///sdcard/AndroidStudy/index.html");//"http://www.baidu.com"
+        loadurl(wv,"file:///android_asset/index.html");
+        //"http://www.baidu.com"
+        //"file:///sdcard/AndroidStudy/index.html"
+    }
+
+    private void getHtml() {
+        AssetManager assetManager = getAssets();
+        InputStream stream = null;
+        try {
+            stream = assetManager.open("index.html");
+        } catch (IOException e) {
+            // handle
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                }
+            }
+        }
     }
     public void init(){//初始化
         wv=(WebView)findViewById(R.id.wv);
@@ -114,7 +138,10 @@ public class WebViewActivity extends Activity{
         view.loadUrl(url);//载入网页
     }
 }
-
+/**
+ * @author xifei
+ * notice: @JavascriptInterface before public method.
+ */
 class JavaScriptInterface {
     Context mContext;
 
