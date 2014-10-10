@@ -71,4 +71,9 @@ public class MainActivity extends Activity{
         Intent intent = new Intent(this, WebViewActivity.class);
         startActivity(intent);
     }
+    
+    public void startDesktopActivity(View view){
+        Intent intent = new Intent(this, DesktopActivity.class);
+        startActivity(intent);
+    }
 }
