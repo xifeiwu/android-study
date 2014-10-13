@@ -76,4 +76,9 @@ public class MainActivity extends Activity{
         Intent intent = new Intent(this, DesktopActivity.class);
         startActivity(intent);
     }
+    
+    public void startHandlerActivity(View view){
+        Intent intent = new Intent(this, HandlerActivity.class);
+        startActivity(intent);
+    }
 }

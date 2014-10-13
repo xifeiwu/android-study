@@ -24,10 +24,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".WebViewActivity"
-                  android:label="@string/app_name">
+                  android:label="@string/WebViewActivity">
         </activity>
         <activity android:name=".DesktopActivity"
-                  android:label="@string/app_name">
+                  android:label="@string/DesktopActivity">
+        </activity>
+        <activity android:name=".HandlerActivity"
+                  android:label="@string/HandlerActivity">
         </activity>
     </application>
 
