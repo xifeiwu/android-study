@@ -2,6 +2,8 @@ package study.android.activity;
 
 import java.util.logging.Logger;
 
+import study.android.surfaceview.SurfaceViewActivity;
+
 
 import android.app.Activity;
 import android.content.Intent;
@@ -79,6 +81,11 @@ public class MainActivity extends Activity{
     
     public void startHandlerActivity(View view){
         Intent intent = new Intent(this, HandlerActivity.class);
+        startActivity(intent);
+    }
+    
+    public void startSurfaceViewActivity(View view){
+        Intent intent = new Intent(this, SurfaceViewActivity.class);
         startActivity(intent);
     }
 }

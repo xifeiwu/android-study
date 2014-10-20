@@ -30,6 +30,9 @@
         <activity android:name=".HandlerActivity"
                   android:label="@string/HandlerActivity">
         </activity>
+        <activity android:name="study.android.surfaceview.SurfaceViewActivity"
+                  android:label="@string/SurfaceViewActivity">
+        </activity>
     </application>
 
 </manifest>
