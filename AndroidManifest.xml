@@ -24,9 +24,14 @@
         <activity android:name=".WebViewActivity"
                   android:label="@string/WebViewActivity">
         </activity>
-        <activity android:name=".DesktopActivity"
-                  android:label="@string/DesktopActivity">
+        
+        <activity android:name="study.android.content.pm.PMActivity"
+                  android:label="@string/PMActivity">
         </activity>
+        <activity android:name="study.android.content.pm.PMActivity_ListView"
+                  android:label="@string/PMActivity">
+        </activity>
+        
         <activity android:name=".HandlerActivity"
                   android:label="@string/HandlerActivity">
         </activity>

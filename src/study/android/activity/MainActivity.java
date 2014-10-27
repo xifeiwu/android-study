@@ -2,6 +2,8 @@ package study.android.activity;
 
 import java.util.logging.Logger;
 
+import study.android.content.pm.PMActivity;
+import study.android.content.pm.PMActivity_ListView;
 import study.android.surfaceview.SurfaceViewActivity;
 
 
@@ -74,8 +76,8 @@ public class MainActivity extends Activity{
         startActivity(intent);
     }
     
-    public void startDesktopActivity(View view){
-        Intent intent = new Intent(this, DesktopActivity.class);
+    public void startPackageManagerActivity(View view){
+        Intent intent = new Intent(this, PMActivity_ListView.class);
         startActivity(intent);
     }
     

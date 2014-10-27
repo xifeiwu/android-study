@@ -1,6 +1,8 @@
-package study.android.activity;
+package study.android.content.pm;
 
 import java.util.List;
+
+import study.android.activity.R;
 
 import android.app.Activity;
 import android.content.ComponentName;
@@ -16,13 +18,13 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-public class DesktopActivity extends Activity {  
+public class PMActivity extends Activity {  
     GridView appsGrid;  
     private List<ResolveInfo> apps;  
     @Override  
     protected void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
-        setContentView(R.layout.desktop);
+        setContentView(R.layout.pm_desktop);
         loadApps();  
         appsGrid = (GridView) findViewById(R.id.apps_list);  
         appsGrid.setAdapter(new AppsAdapter());  
@@ -53,10 +55,10 @@ public class DesktopActivity extends Activity {
         }  
     };
     
-    private void loadApps() {  
+    private void loadApps() {
         Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);  
         mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);  
-        new ImageView(DesktopActivity.this);  
+        new ImageView(PMActivity.this);
         apps = getPackageManager().queryIntentActivities(mainIntent, 0);  
     }  
   
@@ -87,7 +89,7 @@ public class DesktopActivity extends Activity {
             ImageView iv;  
   
             if(view == null){  
-                iv = new ImageView(DesktopActivity.this);  
+                iv = new ImageView(PMActivity.this);  
                 iv.setScaleType(ImageView.ScaleType.FIT_CENTER);  
                 iv.setLayoutParams(new GridView.LayoutParams(50, 50));  
             } else {  
