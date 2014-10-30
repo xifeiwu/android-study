@@ -4,7 +4,8 @@
     android:layout_height="fill_parent">  
     <study.android.surfaceview.MySurfaceView 
         android:layout_width="fill_parent"  
-        android:layout_height="fill_parent" />  
+        android:layout_height="fill_parent" 
+        android:id="@+id/surfaceview" />  
     <TextView android:layout_width="wrap_content"  
         android:layout_height="wrap_content"  
         android:layout_centerHorizontal="true"  

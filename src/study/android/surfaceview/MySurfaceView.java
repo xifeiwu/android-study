@@ -29,7 +29,7 @@ public class MySurfaceView extends SurfaceView implements
   
     @Override  
     public void run() {  
-        while (true) {  
+        while (flag) {  
             draw();  
             logic();  
             try {  
@@ -52,11 +52,15 @@ public class MySurfaceView extends SurfaceView implements
         if (x >= 200 || x <= 30) {  
             move_x = -move_x;  
         }  
-    }  
+    }
   
+    private Thread th;
+    private boolean flag;
     @Override  
-    public void surfaceCreated(SurfaceHolder holder) {  
-        new Thread(this).start();  
+    public void surfaceCreated(SurfaceHolder holder) {
+        flag = true;
+        th = new Thread(this);
+        th.start();
     }  
   
     @Override  
@@ -65,6 +69,7 @@ public class MySurfaceView extends SurfaceView implements
     }  
   
     @Override  
-    public void surfaceDestroyed(SurfaceHolder holder) {  
+    public void surfaceDestroyed(SurfaceHolder holder) {        
+        flag = false;
     }  
 }
