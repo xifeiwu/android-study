@@ -1,10 +1,9 @@
-package study.android.activity;
+package study.android.webkit.WebView;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.logging.Logger;
 
-
+import study.android.activity.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -51,9 +50,7 @@ public class WebViewActivity extends Activity{
               super.handleMessage(msg);
             }
         };
-        loadurl(wv,"file:///android_asset/index.html");
-        //"http://www.baidu.com"
-        //"file:///sdcard/AndroidStudy/index.html"
+        loadurl(wv,"file:///android_asset/www/index.html");
     }
 
     private void getHtml() {
@@ -128,12 +125,6 @@ public class WebViewActivity extends Activity{
         ad.show();//显示对话框
     }
     public void loadurl(final WebView view,final String url){
-//        new Thread(){
-//            public void run(){
-//                handler.sendEmptyMessage(0);
-//                view.loadUrl(url);//载入网页
-//            }
-//        }.start();
         handler.sendEmptyMessage(0);
         view.loadUrl(url);
     }

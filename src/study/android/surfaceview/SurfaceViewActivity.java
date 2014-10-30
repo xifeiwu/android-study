@@ -20,7 +20,7 @@ public class SurfaceViewActivity extends Activity implements OnClickListener {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);  
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        MySurfaceView msfv = new MySurfaceView(this, null);
-        setContentView(R.layout.surfaceview);  
+        setContentView(R.layout.surfaceview);
   
         leftBtn = (Button) this.findViewById(R.id.leftBtn);  
         rightBtn = (Button) this.findViewById(R.id.rightBtn);  

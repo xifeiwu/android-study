@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import study.android.content.pm.PMActivity;
 import study.android.content.pm.PMActivity_ListView;
 import study.android.surfaceview.SurfaceViewActivity;
+import study.android.webkit.WebView.WebViewActivity;
 
 
 import android.app.Activity;
@@ -67,7 +68,7 @@ public class MainActivity extends Activity{
 
     private Logger logger = Logger.getLogger(MainActivity.class.getName());
     private void activityStates(String state){
-//        Toast.makeText(this, MainActivity.class.getName() + " - " + state, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, MainActivity.class.getName() + " - " + state, Toast.LENGTH_SHORT).show();
         logger.info(state);
     }
     
