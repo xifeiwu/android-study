@@ -40,6 +40,9 @@
         <activity android:name="study.android.surfaceview.SurfaceViewActivity"
                   android:label="@string/SurfaceViewActivity">
         </activity>
+        <activity android:name="study.android.widget.ListViewActivity"
+                  android:label="@string/ListViewActivity">
+        </activity>
     </application>
 
 </manifest>

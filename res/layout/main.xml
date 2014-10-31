@@ -28,5 +28,10 @@
         android:layout_height="wrap_content"
         android:text="@string/SurfaceViewActivity"
         android:onClick="startSurfaceViewActivity" />
-
+    
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ListViewActivity"
+        android:onClick="startListViewActivity" />
 </LinearLayout>

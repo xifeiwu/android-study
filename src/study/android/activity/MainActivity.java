@@ -6,6 +6,7 @@ import study.android.content.pm.PMActivity;
 import study.android.content.pm.PMActivity_ListView;
 import study.android.surfaceview.SurfaceViewActivity;
 import study.android.webkit.WebView.WebViewActivity;
+import study.android.widget.ListViewActivity;
 
 
 import android.app.Activity;
@@ -91,4 +92,10 @@ public class MainActivity extends Activity{
         Intent intent = new Intent(this, SurfaceViewActivity.class);
         startActivity(intent);
     }
+    
+    public void startListViewActivity(View view){
+        Intent intent = new Intent(this, ListViewActivity.class);
+        startActivity(intent);
+    }
+    
 }
