@@ -3,6 +3,8 @@ package study.android.webkit.WebViewClient;
 import study.android.activity.LOG;
 import study.android.activity.R;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Message;
@@ -22,11 +24,13 @@ import android.widget.LinearLayout;
 
 public class TestWebViewClient extends Activity{
     public static String TAG = "TestWebViewClient";
+    public static TestWebViewClient instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        instance = this;
     }
 
     @Override
@@ -121,32 +125,31 @@ class ChromeClient extends WebChromeClient{
     }
 
     @Override
-    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-        LOG.i(TestWebViewClient.TAG, "onJsAlert: ");
-        // TODO Auto-generated method stub
-        return super.onJsAlert(view, url, message, result);
-    }
-
-    @Override
     public boolean onJsBeforeUnload(WebView view, String url, String message, JsResult result) {
         LOG.i(TestWebViewClient.TAG, "onJsBeforeUnload: ");
         // TODO Auto-generated method stub
         return super.onJsBeforeUnload(view, url, message, result);
     }
 
-    @Override
-    public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-        LOG.i(TestWebViewClient.TAG, "onJsConfirm: ");
-        // TODO Auto-generated method stub
-        return super.onJsConfirm(view, url, message, result);
-    }
 
-    @Override
-    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
-        LOG.i(TestWebViewClient.TAG, "onJsPrompt: ");
-        // TODO Auto-generated method stub
-        return super.onJsPrompt(view, url, message, defaultValue, result);
-    }
+//    @Override
+//    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+//        LOG.i(TestWebViewClient.TAG, "onJsAlert: ");
+//        // TODO Auto-generated method stub
+//        return super.onJsAlert(view, url, message, result);
+//    }
+//    @Override
+//    public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+//        LOG.i(TestWebViewClient.TAG, "onJsConfirm: ");
+//        // TODO Auto-generated method stub
+//        return super.onJsConfirm(view, url, message, result);
+//    }
+//    @Override
+//    public boolean onJsPrompt(WebView view, String url, String message, String defaultValue, JsPromptResult result) {
+//        LOG.i(TestWebViewClient.TAG, "onJsPrompt: ");
+//        // TODO Auto-generated method stub
+//        return super.onJsPrompt(view, url, message, defaultValue, result);
+//    }
 
     @Override
     public void onReceivedTitle(WebView view, String title) {
@@ -161,7 +164,47 @@ class ChromeClient extends WebChromeClient{
         // TODO Auto-generated method stub
         super.onRequestFocus(view);
     }
-    
+    /**
+    Javascript弹出框有如下三种： 
+    alert();  
+    window.confirm("Are you srue?");  
+    window.prompt("Please input some word";,"this is text");
+    */
+    @Override
+    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+        LOG.i(TestWebViewClient.TAG, "onJsAlert: ");
+        // 对alert的简单封装
+        new AlertDialog.Builder(TestWebViewClient.instance).setTitle("Alert").setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        // TODO
+                    }
+                }).create().show();
+        result.confirm();
+        return true;
+    }
+
+    /**
+     * 处理confirm弹出框
+     */
+    @Override
+    public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
+        LOG.i(TestWebViewClient.TAG, "onJsConfirm: ");
+        result.confirm();
+        return super.onJsConfirm(view, url, message, result);
+    }
+
+    /** 
+     * 处理prompt弹出框 
+     */  
+    @Override  
+    public boolean onJsPrompt(WebView view, String url, String message,  
+            String defaultValue, JsPromptResult result) {
+        LOG.i(TestWebViewClient.TAG, "onJsPrompt: ");
+        result.confirm();  
+        return super.onJsPrompt(view, url, message, message, result);  
+    }
 }
 class ViewClient extends WebViewClient{
 
