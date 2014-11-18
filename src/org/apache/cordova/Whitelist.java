@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.cordova.LOG;
+import study.android.activity.LOG;
 
 import android.net.Uri;
 

@@ -20,8 +20,6 @@ public class TestCordovaActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        LOG.setLogLevel(LOG.INFO);
-        LOG.i(TAG, "onCreate");
     }
     public Activity getActivity(){
         return this;

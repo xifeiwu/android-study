@@ -18,12 +18,15 @@ import android.view.View;
 import android.widget.Toast;
 
 public class MainActivity extends Activity{
+    public static String TAG = "StudyAndroid";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.main);
+        LOG.setLogLevel(LOG.INFO);
+        LOG.i(TAG, "onCreate");
         activityStates("onCreate");
     }
 

@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.cordova.LOG;
+import study.android.activity.LOG;
 
 import android.app.Activity;
 import android.os.Bundle;
