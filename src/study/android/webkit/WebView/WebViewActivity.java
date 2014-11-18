@@ -50,7 +50,7 @@ public class WebViewActivity extends Activity{
               super.handleMessage(msg);
             }
         };
-        loadurl(wv,"file:///android_asset/www/index.html");
+        loadurl(wv,"http://www.baidu.com");//"file:///android_asset/www/index.html"
     }
 
     private void getHtml() {
@@ -87,7 +87,7 @@ public class WebViewActivity extends Activity{
                     handler.sendEmptyMessage(1);//如果全部载入,隐藏进度对话框
                 }   
                 super.onProgressChanged(view, progress);   
-            }   
+            }
         });
  
         pd=new ProgressDialog(WebViewActivity.this);

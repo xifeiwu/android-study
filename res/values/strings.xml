@@ -7,5 +7,6 @@
     <string name="SurfaceViewActivity">SurfaceView示例</string>
     <string name="ListViewActivity">ListViewActivity示例</string>
     <string name="TestCordovaActivity">TestCordovaActivity示例</string>
+    <string name="TestWebViewClient">TestWebViewClient示例</string>
 
 </resources>

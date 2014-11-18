@@ -46,6 +46,9 @@
         <activity android:name="org.apache.cordova.TestCordovaActivity"
                   android:label="@string/TestCordovaActivity">
         </activity>
+        <activity android:name="study.android.webkit.WebViewClient.TestWebViewClient"
+                  android:label="@string/TestWebViewClient">
+        </activity>
     </application>
 
 </manifest>

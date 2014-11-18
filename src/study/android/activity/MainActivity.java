@@ -8,6 +8,7 @@ import study.android.content.pm.PMActivity;
 import study.android.content.pm.PMActivity_ListView;
 import study.android.surfaceview.SurfaceViewActivity;
 import study.android.webkit.WebView.WebViewActivity;
+import study.android.webkit.WebViewClient.TestWebViewClient;
 import study.android.widget.ListViewActivity;
 
 
@@ -108,4 +109,8 @@ public class MainActivity extends Activity{
         startActivity(intent);
     }
     
+    public void startTestWebViewClient(View view){
+        Intent intent = new Intent(this, TestWebViewClient.class);
+        startActivity(intent);
+    }
 }
