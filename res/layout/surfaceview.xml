@@ -21,7 +21,7 @@
         <Button android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
             android:text="LeftButton"  
-            android:id="@+id/leftBtn" />  
+            android:id="@+id/leftBtn" />
         <Button android:layout_width="wrap_content"  
             android:layout_height="wrap_content"  
             android:text="RightButton"  

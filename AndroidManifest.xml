@@ -43,6 +43,9 @@
         <activity android:name="study.android.widget.ListViewActivity"
                   android:label="@string/ListViewActivity">
         </activity>
+        <activity android:name="org.apache.cordova.TestCordovaActivity"
+                  android:label="@string/TestCordovaActivity">
+        </activity>
     </application>
 
 </manifest>

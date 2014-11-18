@@ -2,6 +2,8 @@ package study.android.activity;
 
 import java.util.logging.Logger;
 
+import org.apache.cordova.TestCordovaActivity;
+
 import study.android.content.pm.PMActivity;
 import study.android.content.pm.PMActivity_ListView;
 import study.android.surfaceview.SurfaceViewActivity;
@@ -95,6 +97,11 @@ public class MainActivity extends Activity{
     
     public void startListViewActivity(View view){
         Intent intent = new Intent(this, ListViewActivity.class);
+        startActivity(intent);
+    }
+    
+    public void startTestCordovaActivity(View view){
+        Intent intent = new Intent(this, TestCordovaActivity.class);
         startActivity(intent);
     }
     
