@@ -49,6 +49,13 @@
         <activity android:name="study.android.webkit.WebViewClient.TestWebViewClient"
                   android:label="@string/TestWebViewClient">
         </activity>
+        <activity android:name="study.android.content.Intent.StartOtherAppsByIntent"
+                  android:label="@string/StartOtherAppsByIntent">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.CATEGORY_ALTERNATIVE" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

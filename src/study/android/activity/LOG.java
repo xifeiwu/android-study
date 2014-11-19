@@ -27,6 +27,7 @@ import android.util.Log;
  * See http://developer.android.com/reference/java/util/Formatter.html
  */
 public class LOG {
+    public static String TAG;
 
     public static final int VERBOSE = Log.VERBOSE;
     public static final int DEBUG = Log.DEBUG;
@@ -36,6 +37,10 @@ public class LOG {
 
     // Current log level
     public static int LOGLEVEL = Log.ERROR;
+    
+    public static void setTAG(String tag){
+        TAG = tag;
+    }
 
     /**
      * Set the current log level.

@@ -13,7 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;  
 import android.widget.ListView;  
 import android.widget.TextView;
-public class ListViewActivity  extends Activity {
+public class ListViewActivity extends Activity {
 
     private ListView list;  
     private StringAdapter adapter;  

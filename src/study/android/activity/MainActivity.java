@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import org.apache.cordova.TestCordovaActivity;
 
+import study.android.content.Intent.StartActivityListView;
+import study.android.content.Intent.StartOtherAppsByIntent;
 import study.android.content.pm.PMActivity;
 import study.android.content.pm.PMActivity_ListView;
 import study.android.surfaceview.SurfaceViewActivity;
@@ -26,6 +28,7 @@ public class MainActivity extends Activity{
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.main);
+        LOG.setTAG(TAG);
         LOG.setLogLevel(LOG.INFO);
         LOG.i(TAG, "onCreate");
         activityStates("onCreate");
@@ -111,6 +114,11 @@ public class MainActivity extends Activity{
     
     public void startTestWebViewClient(View view){
         Intent intent = new Intent(this, TestWebViewClient.class);
+        startActivity(intent);
+    }
+    
+    public void startStartOtherAppsByIntent(View view){
+        Intent intent = new Intent(this, StartOtherAppsByIntent.class);
         startActivity(intent);
     }
 }
