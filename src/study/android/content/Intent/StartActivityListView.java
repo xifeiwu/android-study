@@ -1,6 +1,5 @@
 package study.android.content.Intent;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -10,7 +9,6 @@ import org.apache.http.protocol.HTTP;
 import study.android.activity.LOG;
 import study.android.activity.R;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,7 +17,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
-import android.util.Log;
+import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +34,12 @@ public class StartActivityListView extends ListView {
         ACTOPN_VIEW,
         ACTION_SEND,
         ACTION_INSERT_CALENDER,
+        ACTION_PICK_CONTACT,
+        INTENT_CHOOSER,
+        INTENT_CHOOSER_ACTION_SEND,
+        INTENT_CHOOSER_ACTION_VIEW,
+        INTENT_CHOOSER_ACTION_INSERT,
+        INTENT_CHOOSER_ACTION_PICK,
     };
     private String[] strArray = new String[]{
             "ACTION_DIAL", 
@@ -44,6 +48,12 @@ public class StartActivityListView extends ListView {
             "ACTOPN_VIEW", 
             "ACTION_SEND",
             "ACTION_INSERT_CALENDER",
+            "ACTION_PICK_CONTACT",            
+            "INTENT_CHOOSER",
+            "INTENT_CHOOSER_ACTION_SEND",
+            "INTENT_CHOOSER_ACTOPN_VIEW",
+            "INTENT_CHOOSER_ACTION_INSERT",
+            "INTENT_CHOOSER_ACTION_PICK",
             };
     private StringAdapter adapter;
     private StartOtherAppsByIntent mContext;
@@ -64,6 +74,7 @@ public class StartActivityListView extends ListView {
         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
             // TODO Auto-generated method stub
             ToDo todo = ToDo.values()[arg2]; //do your own bounds checking
+            Intent intent;
             switch(todo){
             case ACTION_DIAL:
                 LOG.i(LOG.TAG, "ACTION_DIAL: " + arg2);
@@ -88,8 +99,35 @@ public class StartActivityListView extends ListView {
                 LOG.i(LOG.TAG, "ACTION_INSERT_CALENDER: " + arg2);
                 actionInsert_Calendar();
                 break;
+            case ACTION_PICK_CONTACT:
+                LOG.i(LOG.TAG, "ACTION_PICK_CONTACT: " + arg2);
+                actionPick_Contact();
+                break;
+            case INTENT_CHOOSER:
+                LOG.i(LOG.TAG, "INTENT_CHOOSER: " + arg2);
+                break;
+            case INTENT_CHOOSER_ACTION_SEND:
+                LOG.i(LOG.TAG, "INTENT_CHOOSER_ACTION_SEND: " + arg2);
+                intent = new Intent(Intent.ACTION_SEND);
+                showIntentChooser(intent);
+                break;
+            case INTENT_CHOOSER_ACTION_VIEW:
+                LOG.i(LOG.TAG, "INTENT_CHOOSER_ACTOPN_VIEW: " + arg2);
+                 intent = new Intent(Intent.ACTION_VIEW);
+                showIntentChooser(intent);
+                break;
+            case INTENT_CHOOSER_ACTION_INSERT:
+                LOG.i(LOG.TAG, "INTENT_CHOOSER_ACTION_INSERT: " + arg2);
+                intent = new Intent(Intent.ACTION_INSERT);
+                showIntentChooser(intent);
+                break;
+            case INTENT_CHOOSER_ACTION_PICK:
+                LOG.i(LOG.TAG, "INTENT_CHOOSER_ACTION_PICK: " + arg2);
+                intent = new Intent(Intent.ACTION_PICK);
+                showIntentChooser(intent);
+                break;
             }
-        }        
+        }    
     };
 
     private void actionDail(){
@@ -167,6 +205,11 @@ public class StartActivityListView extends ListView {
         };
         queryActivities(calendarIntent, yes, no);
     }
+    private void actionPick_Contact(){
+        Intent pickContactIntent = new Intent(Intent.ACTION_PICK, Uri.parse("content://contacts"));
+        pickContactIntent.setType(Phone.CONTENT_TYPE); // Show user only contacts w/ phone numbers
+        mContext.startActivityForResult(pickContactIntent, ToDo.ACTION_PICK_CONTACT.ordinal());
+    }
 
     static boolean isIntentSafe;
     private boolean queryActivities(Intent intent, DialogInterface.OnClickListener yes, DialogInterface.OnClickListener no){
@@ -178,6 +221,14 @@ public class StartActivityListView extends ListView {
             mContext.mAlertDialog("错误", "未找到匹配Intent的Activity，是否继续？", yes, no);
         }
         return isIntentSafe;
+    }
+    
+    private void showIntentChooser(Intent intent){
+        // Always use string resources for UI text. This says something like "Share this photo with"
+        String title = intent.getAction().toString();
+        // Create and start the chooser
+        Intent chooser = Intent.createChooser(intent, title);
+        mContext.startActivity(chooser);
     }
 }
 class StringAdapter extends ArrayAdapter<String>{
