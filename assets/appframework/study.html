@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+
+<head>
+  <title>UI Starter</title>
+  <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <link rel="stylesheet" type="text/css" href="css/icons.css" />
+  <link rel="stylesheet" type="text/css" href="css/main.css"  />
+  <link rel="stylesheet" type="text/css" href="css/appframework.css"  />
+  <link rel="stylesheet" type="text/css" href="css/lists.css"  />
+  <link rel="stylesheet" type="text/css" href="css/forms.css"  />
+  <link rel="stylesheet" type="text/css" href="css/buttons.css"  />   
+  <!-- uncomment for apps
+  <script type="text/javascript" charset="utf-8" src="indelxdk.js"></script>        
+  -->
+  <script type="text/javascript" charset="utf-8" src="./appframework.js"></script>        
+  <script type="text/javascript" charset="utf-8" src="./plugins/af.scroller.js"></script>
+  <script type="text/javascript" charset="utf-8" src="./plugins/af.css3animate.js"></script>
+  <script type="text/javascript" charset="utf-8" src="./ui/appframework.ui.js"></script>
+  <!-- emulate touch on desktop browsers only -->
+  <script>
+  if (!((window.DocumentTouch && document instanceof DocumentTouch) || 'ontouchstart' in window)) {
+    var script = document.createElement("script");
+    script.src = "plugins/af.desktopBrowsers.js";
+    var tag = $("head").append(script);
+    $.os.android = true; //let's make it run like an android device
+    $.os.desktop = true;
+  }
+  </script>
+  <script type="text/javascript">
+    var webRoot = "./";
+    $.ui.autoLaunch = false; //By default, it is set to true and you're app will run right away.  We set it to false to show a splashscreen
+    /* This function runs when the body is loaded.*/
+    var init = function () {
+      $.ui.backButtonText = "Back";// We override the back button text to always say "Back"
+      window.setTimeout(function () {
+        $.ui.launch();
+      }, 1500);//We wait 1.5 seconds to call $.ui.launch after DOMContentLoaded fires
+    };
+    document.addEventListener("DOMContentLoaded", init, false);
+    $.ui.ready(function () {
+    //This function will get executed when $.ui.launch has completed
+    });
+
+    /* This code is used for Intel native apps */
+    var onDeviceReady = function () {
+      intel.xdk.device.hideSplashScreen();
+    };
+    document.addEventListener("intel.xdk.device.ready", onDeviceReady, false);
+  </script>
+</head>
+
+<body>
+  <div id="afui"> <!-- this is the main container div.  This way, you can have only part of your app use UI -->
+  <!-- this is the header div at the top -->
+  <div id="header">
+    <a href="javascript:$.ui.toggleLeftSideMenu()" class="button" style="float:right">Toggle Nav</a>
+  </div>
+
+  <header id="common_header">
+    <h1>COMMON Welcome</h1>
+    <a class="button" style="float:right;" class="icon home"></a>
+  </header>
+  <footer id="custom_footer">
+    <a href='#about' class='icon info'>About</a>
+  </footer>
+  <div id="content">
+    <!-- here is where you can add your panels -->
+    <div class="panel" id="home" data-header="common_header">
+      This is a basic skeleton UI sample
+      <header>
+        <h1>Home Welcome</h1>
+        <a class="button" style="float:right;" class="icon home"></a>
+      </header>
+    </div>
+    <div class="panel" id="picture">
+      <header>
+        <h1>Picture Welcome</h1>
+        <a class="button" style="float:right;" class="icon home"></a>
+      </header>
+      This is a picture show
+      <ul class="list inset">
+        <li>Jack</li>
+        <li>Lucy</li>
+        <li>John</li>
+        <li>Larry</li>
+      </ul>
+      <!-- checkbox -->
+      <input type="checkbox" name="confirm" id="confirm">  <label for="confirm">Do you agree to the terms?</label>
+      <br>
+      <!-- radio button-->
+      <input type="radio" name="gender" value='Male' id="Male" >  <label for="Male">Male</label>
+      <input type="radio" name="gender" value='Female' id="Female" >  <label for="Female">Female</label>
+      <br>
+      <!-- Toggle/Slider-->
+      Do you agree to the terms?
+      <input type="checkbox" name="slider" id="slider" class="toggle"> <label for="slider" data-on="Yes" data-off="No"> <span></span> </label>
+      <a class="button icon home green">Home</a>
+    </div>
+  </div>
+  <!-- bottom navbar. Add additional tabs here -->
+  <div id="navbar">
+    <div class="horzRule"></div>
+    <a href="#home" id='navbar_home' class='icon home'>home</a>
+    <a href="#picture" id='navbar_picture' class='icon camera'>Picture</a>
+  </div>
+  <!-- this is the default left side nav menu.  If you do not want any, do not include these -->
+  <nav>
+    <div class='title'>Home</div>
+    <ul>
+    <li >
+      <a class="icon home mini" href="#main">Selectors</a>
+    </li>
+    </ul>
+  </nav>
+  </div>
+</body>
+</html>

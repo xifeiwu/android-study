@@ -50,7 +50,9 @@ public class WebViewActivity extends Activity{
               super.handleMessage(msg);
             }
         };
-        loadurl(wv,"http://www.baidu.com");//"file:///android_asset/www/index.html"
+        loadurl(wv,"file:///android_asset/appframework/index.html");
+        //"http://www.baidu.com"
+        //"file:///android_asset/www/index.html"
     }
 
     private void getHtml() {
@@ -95,7 +97,7 @@ public class WebViewActivity extends Activity{
         pd.setMessage("数据载入中，请稍候！");
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {//捕捉返回键
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && wv.canGoBack()) {   
+        if ((keyCode == KeyEvent.KEYCODE_BACK) && wv.canGoBack()) {
             wv.goBack();   
             return true;   
         }else if(keyCode == KeyEvent.KEYCODE_BACK){
