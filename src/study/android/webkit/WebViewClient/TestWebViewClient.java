@@ -65,6 +65,7 @@ public class TestWebViewClient extends Activity{
         root.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
         appView = new WebView(this);
+//        appView.loadUrl("javascript:");
         appView.setLayoutParams(new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT,
