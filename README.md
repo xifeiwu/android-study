@@ -6,6 +6,10 @@ add new activity to project DevAndroid:
     </activity>
    add uses-permission of the activity, such as:
     <uses-permission android:name="android.permission.INTERNET" />
+3. add correspond app_name in string.xml
+4. add entry point in ListView of MainActivity.
+
+<!-- obsolute
 3. add new button in layout of MainActivity, and corresponding onclick method of the button:
     <Button
         android:layout_width="wrap_content"
@@ -17,3 +21,4 @@ add new activity to project DevAndroid:
         Intent intent = new Intent(this, DesktopActivity.class);
         startActivity(intent);
     }
+-->

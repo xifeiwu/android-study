@@ -9,6 +9,7 @@ import study.android.content.Intent.StartOtherAppsByIntent;
 import study.android.content.Intent.StartActivityListView.ToDo;
 import study.android.content.pm.PMActivity;
 import study.android.content.pm.PMActivity_ListView;
+import study.android.net.nsd.NsdChatActivity;
 import study.android.surfaceview.SurfaceViewActivity;
 import study.android.webkit.WebView.WebViewActivity;
 import study.android.webkit.WebViewClient.TestWebViewClient;
@@ -106,6 +107,7 @@ public class MainActivity extends Activity{
         TESTCORDOVAACTIVITY,
         TESTWEBVIEWCLIENT,
         STARTOTHERAPPSBYINTENT,
+        NASCHATACTIVITY,
     };
 
     private ActivityInfo[] activityArray = new ActivityInfo[]{
@@ -119,7 +121,7 @@ public class MainActivity extends Activity{
                     "PackageManager控件使用Demo。"),
             new ActivityInfo(
                     ToDo.HANDLERACITIV.ordinal(),
-                    "tHandlerActivity", 
+                    "HandlerActivity", 
                     "Handler控件使用Demo。"),
             new ActivityInfo(
                     ToDo.SURFACEVIEWACTIVITY.ordinal(),
@@ -141,6 +143,10 @@ public class MainActivity extends Activity{
                     ToDo.STARTOTHERAPPSBYINTENT.ordinal(),
                     "StartOtherAppsByIntent", 
                     "Intent控件使用Demo。"),
+            new ActivityInfo(
+                    ToDo.NASCHATACTIVITY.ordinal(),
+                    "NsdChatActivity", 
+                    "基于网络发现功能的文字通讯。"),
     };
     private OnItemClickListener itmeClickListener = new OnItemClickListener(){
 
@@ -173,6 +179,9 @@ public class MainActivity extends Activity{
                 break;
             case STARTOTHERAPPSBYINTENT:
                 intent = new Intent(mContext, StartOtherAppsByIntent.class);
+                break;
+            case NASCHATACTIVITY:
+                intent = new Intent(mContext, NsdChatActivity.class);
                 break;
             }
             if(null != intent){

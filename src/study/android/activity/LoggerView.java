@@ -3,16 +3,13 @@ package study.android.activity;
 import java.util.Vector;
 import java.util.logging.Logger;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
-import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
@@ -22,16 +19,16 @@ import android.view.SurfaceView;
  * @author xifei
  * notice: the value of screenW
  */
-public class LoggerView extends SurfaceView implements Callback, Runnable {
+@SuppressLint("ClickableViewAccessibility") public class LoggerView extends SurfaceView implements Callback, Runnable {
     public Logger logger = Logger.getLogger(LoggerView.class.getName());
     private SurfaceHolder sfh;
     private Paint paint;
     private Canvas canvas;
     private Activity mContext;
 
-    public LoggerView(Context context, AttributeSet attrs) {
+    public LoggerView(Context context) {
         // TODO Auto-generated constructor stub　　
-        super(context, attrs);
+        super(context);
         mContext = (Activity) context;
         sfh = this.getHolder();
         sfh.addCallback(this);
@@ -40,18 +37,12 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(20);
         paint.setAntiAlias(true);
-//        logger.setLevel(Level.OFF);
         DisplayMetrics metrics = new DisplayMetrics();        
         mContext.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        screenW = metrics.heightPixels;
-        screenH = metrics.widthPixels;
-
-//        Display display = getWindowManager().getDefaultDisplay();
-//        int width = display.getWidth();
-//        int height = display.getHeight();
+        screenW = metrics.widthPixels;
+        screenH = metrics.heightPixels;
         
-//        screenW = 1000;
-        logger.info("size of screen: " + this.screenW + "*" + this.screenH);
+        this.info("size of DisplayMetrics: " + this.screenW + "*" + this.screenH);
     }
 
     private int di, dp, dpx, dpy;
@@ -59,7 +50,6 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
     public void myDraw() {
         canvas = sfh.lockCanvas();
         canvas.drawColor(Color.LTGRAY);
-//        canvas.drawText(timeStr, 10, 10, paint);
         for (di = 0; di <  vecLength; di++) {
             dstr = subStrVec.elementAt(di);
             dp = subPosVec.elementAt(di);
@@ -73,19 +63,18 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
     private void logic() {
     }
 
-    private float offsetX = 0, offsetY = 0;
-    private float originX, originY;
-    private float distanceX, distanceY = 0;
+    private float offsetY = 0;
+    private float originY;
+    private float distanceY = 0;
     private boolean isPressed = false;
-    private float eventX, eventY;
+    private float eventY;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        eventX = event.getX();
+        event.getX();
         eventY = event.getY();
         switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
             isPressed = true;
-            originX = eventX;
             originY = eventY;
             break;
         case MotionEvent.ACTION_MOVE:
@@ -104,7 +93,6 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
                     if(offsetY < min)
                         offsetY = min;
                 }
-                distanceX = 0;
                 distanceY = 0;
             }
             break;
@@ -129,7 +117,7 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
         // TODO Auto-generated method stub
         screenW = getWidth();
         screenH = getHeight();
-        logger.info(screenW + " * " + screenH);
+        this.info("size from surfaceCreated: " + this.screenW + "*" + this.screenH);
         flag = true;
         mThread = new Thread(this);
         mThread.start();
@@ -168,10 +156,11 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
     private Vector<Integer> subPosVec = new Vector<Integer>();
     private int vecLength = 0;
 
-    public void refreshSubVec(String mainStr) {
-        if (mainStr.length() == 0) {
-            return;
-        }
+    /**
+     * 初始化字符串Vector。清空字符串。
+     * @param mainStr: 将要添加的字符串。
+     */
+    public void refreshSubVec() {
         if (subStrVec != null) {
             subStrVec.removeAllElements();
         } else {
@@ -184,12 +173,13 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
         }
         // subColor = new Vector<Character>();
         vecLength = 0;
-        appendToSubVec(mainStr);
     }
+    /**
+     * 向绘制数组中添加字符串。
+     * @param mainStr: 将要添加的字符串。
+     */
     private void appendToSubVec(String mainStr) {
         int i, strLen = mainStr.length();
-//        logger.info("strLen: "+strLen);
-
         char ch;
         String substr;
         int start, end, px, py;

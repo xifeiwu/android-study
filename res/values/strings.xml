@@ -9,5 +9,6 @@
     <string name="TestCordovaActivity">TestCordovaActivity示例</string>
     <string name="TestWebViewClient">TestWebViewClient示例</string>
     <string name="StartOtherAppsByIntent">StartOtherAppsByIntent示例</string>
+    <string name="NsdChatActivity">NsdChatActivity示例</string>
 
 </resources>

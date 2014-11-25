@@ -64,6 +64,9 @@
 		        <data android:mimeType="image/*"/>
 		    </intent-filter>
         </activity>
+        <activity android:name="study.android.net.nsd.NsdChatActivity"
+                  android:label="@string/NsdChatActivity">
+        </activity>
     </application>
 
 </manifest>
