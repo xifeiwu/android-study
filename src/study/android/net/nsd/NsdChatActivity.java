@@ -18,18 +18,10 @@ package study.android.net.nsd;
 
 import study.android.activity.LoggerView;
 import study.android.activity.StudyActivity;
-import android.app.Activity;
-import android.net.nsd.NsdServiceInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class NsdChatActivity extends StudyActivity {
 	NsdHelper mNsdHelper;
@@ -72,17 +64,16 @@ public class NsdChatActivity extends StudyActivity {
 
     @Override
     protected void onDestroy() {
-        mNsdHelper.unRegisterService();
+        if (mNsdHelper != null) {
+            mNsdHelper.unRegisterService();
+            mNsdHelper.stopDiscovery();
+        }
         super.onDestroy();
     }
-    
 	
 	public void onResolveService(View v){
 	    this.mNsdHelper.resolveServerInfo();
 	}
-
-
-
     
     private final int START_DISCOVER = 0, STOP_DISCOVER = 1, LIST_SERVICE_INFO = 2, RESOLVE_SERVICE = 3,
             REGISTER_SERVICE = 4, UNREGISTER_SERVICE = 5, CLEAR_SCREEN = 6;

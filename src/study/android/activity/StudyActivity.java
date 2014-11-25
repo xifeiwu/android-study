@@ -1,6 +1,5 @@
 package study.android.activity;
 
-import study.android.content.Intent.StartOtherAppsByIntent;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
