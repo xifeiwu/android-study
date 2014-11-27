@@ -11,6 +11,7 @@ import study.android.content.pm.PMActivity;
 import study.android.content.pm.PMActivity_ListView;
 import study.android.net.nsd.NsdChatActivity;
 import study.android.surfaceview.SurfaceViewActivity;
+import study.android.webkit.WebView.AppFrameworkActivity;
 import study.android.webkit.WebView.WebViewActivity;
 import study.android.webkit.WebViewClient.TestWebViewClient;
 import study.android.widget.ListViewActivity;
@@ -30,7 +31,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends Activity{
+public class MainActivity extends StudyActivity{
     public static String TAG = "StudyAndroid";
     private ListView activityList;
     private MainActivity mContext;
@@ -99,34 +100,51 @@ public class MainActivity extends Activity{
     }
 
     public static enum ToDo {
-        WEBVIEWACTIVITY,
-        PACKAGEMANAGERACTIVITY,
         HANDLERACITIV,
+        STARTOTHERAPPSBYINTENT,
+        PACKAGEMANAGERACTIVITY,
+        NASCHATACTIVITY,
         SURFACEVIEWACTIVITY,
+        WEBVIEWACTIVITY,
+        APPFRAMEWORKACTIVITY,
+        TESTWEBVIEWCLIENT,
         LISTVIEWACTIVITY,
         TESTCORDOVAACTIVITY,
-        TESTWEBVIEWCLIENT,
-        STARTOTHERAPPSBYINTENT,
-        NASCHATACTIVITY,
     };
 
     private ActivityInfo[] activityArray = new ActivityInfo[]{
-            new ActivityInfo(
-                    ToDo.WEBVIEWACTIVITY.ordinal(),
-                    "WebviewActivity", 
-                    "Webview控件使用Demo。"),
-            new ActivityInfo(
-                    ToDo.PACKAGEMANAGERACTIVITY.ordinal(), 
-                    "PackageManagerActivity", 
-                    "PackageManager控件使用Demo。"),
             new ActivityInfo(
                     ToDo.HANDLERACITIV.ordinal(),
                     "HandlerActivity", 
                     "Handler控件使用Demo。"),
             new ActivityInfo(
+                    ToDo.STARTOTHERAPPSBYINTENT.ordinal(),
+                    "StartOtherAppsByIntent", 
+                    "Intent控件使用Demo。"),
+            new ActivityInfo(
+                    ToDo.PACKAGEMANAGERACTIVITY.ordinal(), 
+                    "PackageManagerActivity", 
+                    "PackageManager控件使用Demo。"),
+            new ActivityInfo(
+                    ToDo.NASCHATACTIVITY.ordinal(),
+                    "NsdChatActivity", 
+                    "基于网络发现功能的文字通讯。"),
+            new ActivityInfo(
                     ToDo.SURFACEVIEWACTIVITY.ordinal(),
                     "SurfaceViewActivity", 
                     "SurfaceView控件使用Demo。"),
+            new ActivityInfo(
+                    ToDo.WEBVIEWACTIVITY.ordinal(),
+                    "WebviewActivity", 
+                    "Webview控件使用Demo。"),
+            new ActivityInfo(
+                    ToDo.APPFRAMEWORKACTIVITY.ordinal(),
+                    "AppFrameworkActivity", 
+                    "远程加载html5界面。"),
+            new ActivityInfo(
+                    ToDo.TESTWEBVIEWCLIENT.ordinal(),
+                    "TestWebViewClient", 
+                    "WebViewClient控件使用Demo。"),
             new ActivityInfo(
                     ToDo.LISTVIEWACTIVITY.ordinal(),
                     "ListViewActivity", 
@@ -135,18 +153,6 @@ public class MainActivity extends Activity{
                     ToDo.TESTCORDOVAACTIVITY.ordinal(),
                     "TestCordovaActivity", 
                     "学习Cordova中的方法"),
-            new ActivityInfo(
-                    ToDo.TESTWEBVIEWCLIENT.ordinal(),
-                    "TestWebViewClient", 
-                    "WebViewClient控件使用Demo。"),
-            new ActivityInfo(
-                    ToDo.STARTOTHERAPPSBYINTENT.ordinal(),
-                    "StartOtherAppsByIntent", 
-                    "Intent控件使用Demo。"),
-            new ActivityInfo(
-                    ToDo.NASCHATACTIVITY.ordinal(),
-                    "NsdChatActivity", 
-                    "基于网络发现功能的文字通讯。"),
     };
     private OnItemClickListener itmeClickListener = new OnItemClickListener(){
 
@@ -158,6 +164,9 @@ public class MainActivity extends Activity{
             switch(todo){
             case WEBVIEWACTIVITY:
                 intent = new Intent(mContext, WebViewActivity.class);
+                break;
+            case APPFRAMEWORKACTIVITY:
+                intent = new Intent(mContext, AppFrameworkActivity.class);
                 break;
             case PACKAGEMANAGERACTIVITY:
                 intent = new Intent(mContext, PMActivity_ListView.class);

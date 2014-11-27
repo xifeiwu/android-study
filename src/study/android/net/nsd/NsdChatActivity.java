@@ -16,6 +16,9 @@
 
 package study.android.net.nsd;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import study.android.activity.LoggerView;
 import study.android.activity.StudyActivity;
 import android.os.Bundle;
@@ -128,7 +131,11 @@ public class NsdChatActivity extends StudyActivity {
             mNsdHelper.unRegisterService();
             break;
         case CLEAR_SCREEN:
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");       
+            Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
+            String curtime = formatter.format(curDate); 
             loggerView.refreshSubVec();
+            loggerView.info(curtime);
             break;
         }
         return super.onOptionsItemSelected(item);
