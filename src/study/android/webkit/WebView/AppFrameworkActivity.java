@@ -45,7 +45,7 @@ public class AppFrameworkActivity extends StudyActivity{
               super.handleMessage(msg);
             }
         };
-        wv.loadUrl("http://192.168.160.176:8000/study.html");
+        wv.loadUrl("http://192.168.160.176:8000/study.html?ios7");
     }
 
     private void getHtml() {
