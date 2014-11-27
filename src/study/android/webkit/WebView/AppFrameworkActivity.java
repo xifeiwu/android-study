@@ -2,7 +2,6 @@ package study.android.webkit.WebView;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import study.android.activity.R;
 import study.android.activity.StudyActivity;
 import android.app.ProgressDialog;
@@ -10,6 +9,8 @@ import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Window;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -44,7 +45,7 @@ public class AppFrameworkActivity extends StudyActivity{
               super.handleMessage(msg);
             }
         };
-        loadurl(wv,"http://192.168.160.176:8000/");
+        wv.loadUrl("http://192.168.160.176:8000/study.html");
     }
 
     private void getHtml() {
@@ -92,22 +93,29 @@ public class AppFrameworkActivity extends StudyActivity{
         handler.sendEmptyMessage(0);
         view.loadUrl(url);
     }
+    public void reloadurl(final WebView view){
+        handler.sendEmptyMessage(0);
+        view.reload();
+    }
+
+    private final int RELOAD = 0;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // TODO Auto-generated method stub
+        super.onCreateOptionsMenu(menu);
+        menu.add(0, RELOAD, 0, "刷新页面");
+        return true;
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // TODO Auto-generated method stub
+        switch (item.getItemId()) {
+        case RELOAD:
+            reloadurl(wv);
+            break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
-///**
-// * @author xifei
-// * notice: @JavascriptInterface before public method.
-// */
-//class JavaScriptInterface {
-//    Context mContext;
-//
-//    /** Instantiate the interface and set the context */
-//    JavaScriptInterface(Context c) {
-//        mContext = c;
-//    }
-//
-//    /** Show a toast from the web page */
-//    @JavascriptInterface 
-//    public void showToast(String toast) {
-//        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
-//    }
-//}
