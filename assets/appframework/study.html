@@ -92,6 +92,7 @@
         <script type="text/javascript" charset="utf-8" src="./ui/transitions/slideUp.js"></script>
         <script type="text/javascript" charset="utf-8" src="./plugins/af.slidemenu.js"></script>
         <script type="text/javascript" charset="utf-8" src="./plugins/af.8tiles.js"></script>
+        <script type="text/javascript" charset="utf-8" src="custom.js"></script>
 
         <script type="text/javascript">
             /* This function runs once the page is loaded, but intel.xdk is not yet active */
@@ -259,25 +260,25 @@
                 <div class="panel" id="panel_nsd" title="在线服务列表" data-tab="navbar_nsd" data-nav="none">                    
                     <ul class="list">
                         <li>
-                            <a href="#item1">
+                            <a href="#panel_nsd_logview">
                                 <img class="list-image" src="data/male_user_icon.svg" />
                                 <div class="list-text"><b>username1</b><br>Placeholder text for this list item 1. This sections can modified for your need.</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#item2">
+                            <a href="#panel_nsd_logview">
                                 <img class="list-image" src="data/male_user_icon.svg" />
                                 <div class="list-text"><b>username2</b><br>Placeholder text for this list item 2. This sections can modified for your need.</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#item3">
+                            <a href="#panel_nsd_logview">
                                 <img class="list-image" src="data/female_user_icon.svg" />
                                 <div class="list-text"><b>username3</b><br>Placeholder text for this list item 3. This sections can modified for your need.</div>
                             </a>
                         </li>
                         <li>
-                            <a href="#item4">
+                            <a href="#panel_nsd_logview">
                                 <img class="list-image" src="data/male_user_icon.svg" />
                                 <div class="list-text"><b>username4</b><br>Placeholder text for this list item 4. This sections can modified for your need.</div>
                             </a>
@@ -286,6 +287,27 @@
                 </div>
             </div>
 
+            <div class="panel" style="border:green 1px solid" title="聊天" id="panel_nsd_logview" data-modal="true" data-unload="unloadedPanel">
+                    <ul id="panel_nsd_logview_history">
+                        <li>
+                            Jack
+                        </li>
+                        <li>
+                            Lucy
+                        </li>
+                        <li>
+                            John
+                        </li>
+                        <li>
+                            Larry
+                        </li>
+                    </ul>
+                    <div id="panel_nsd_logview_form" style="border:red 1px solid;">
+                        <textarea rows="1" style="width:80%;" placeholder="enter what you want to say."></textarea>
+                        <a class="button" style="float:right" onclick="updateLogView()">发送</a>
+                    </div>
+            </div>
+            
             <!-- bottom navbar. Add additional tabs here -->
             <div id="navbar">
                 <div class="horzRule"></div>

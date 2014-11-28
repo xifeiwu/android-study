@@ -1,7 +1,10 @@
 package study.android.webkit.WebView;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+
+import study.android.activity.MainActivity;
 import study.android.activity.R;
 import study.android.activity.StudyActivity;
 import android.app.ProgressDialog;
@@ -13,8 +16,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 public class AppFrameworkActivity extends StudyActivity{
     /** Called when the activity is first created. */
@@ -46,27 +51,44 @@ public class AppFrameworkActivity extends StudyActivity{
             }
         };
         wv.loadUrl("http://192.168.160.176:8000/study.html?ios7");
+//        Toast.makeText(this, "http://192.168.160.176:8000/study.html?ios7", Toast.LENGTH_SHORT).show();
     }
 
-    private void getHtml() {
-        AssetManager assetManager = getAssets();
-        InputStream stream = null;
-        try {
-            stream = assetManager.open("index.html");
-        } catch (IOException e) {
-            // handle
-        } finally {
-            if (stream != null) {
-                try {
-                    stream.close();
-                } catch (IOException e) {
-                }
-            }
-        }
+@Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+//        File file = CacheManager.getCacheFileBaseDir();  
+//        if (file != null && file.exists() && file.isDirectory()) {
+//            for (File item : file.listFiles()) {
+//                item.delete();
+//            }
+//            file.delete();
+//        }
+        this.deleteDatabase("webview.db");
+        this.deleteDatabase("webviewCache.db");
+        super.onDestroy();
     }
+
+    //    private void getHtml() {
+//        AssetManager assetManager = getAssets();
+//        InputStream stream = null;
+//        try {
+//            stream = assetManager.open("index.html");
+//        } catch (IOException e) {
+//            // handle
+//        } finally {
+//            if (stream != null) {
+//                try {
+//                    stream.close();
+//                } catch (IOException e) {
+//                }
+//            }
+//        }
+//    }
     public void init(){//初始化
         wv=(WebView)findViewById(R.id.wv);
         wv.getSettings().setJavaScriptEnabled(true);//可用JS
+        wv.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存        
 //        wv.addJavascriptInterface(new JavaScriptInterface(this), "AndroidFunction");
         wv.setScrollBarStyle(0);//滚动条风格，为0就是不给滚动条留空间，滚动条覆盖在网页上
         wv.setWebViewClient(new WebViewClient(){   
