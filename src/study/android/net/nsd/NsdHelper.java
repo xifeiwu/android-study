@@ -20,14 +20,22 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.nsd.NsdServiceInfo;
 import android.net.nsd.NsdManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 @SuppressLint("NewApi") 
 public class NsdHelper {
@@ -41,13 +49,15 @@ public class NsdHelper {
 
 
     public static final String TAG = "NsdHelper";
-    public String mServiceName = "NsdChat";
+//    public String mServiceName = "NsdChat";
     public static final String SERVICE_TYPE = "_http._tcp.";
+    private Handler mHandler;
 
 //    NsdServiceInfo mService;
 
-    public NsdHelper(Context context) {
+    public NsdHelper(Context context, Handler handler) {
         mContext = (NsdChatActivity) context;
+        mHandler = handler;
         mNsdManager = (NsdManager) context
                 .getSystemService(Context.NSD_SERVICE);
     }
@@ -63,37 +73,30 @@ public class NsdHelper {
         mDiscoveryListener = new NsdManager.DiscoveryListener() {
             @Override
             public void onDiscoveryStarted(String regType) {
-                Log.d(TAG, "Service discovery started");
-                mContext.show("Service discovery started");
+                sendNotification("onDiscoveryStarted", "Service discovery started");
             }
             @Override
             public void onServiceFound(NsdServiceInfo service) {
-                Log.d(TAG, "onServiceFound: " + NsdServiceInfoToString(service));
-                mContext.show("onServiceFound:" + NsdServiceInfoToString(service));
+                sendNotification("onServiceFound", NsdServiceInfoToJSON(service).toString());
                 addServerInfo(service);
             }
             @Override
             public void onServiceLost(NsdServiceInfo service) {
-                Log.d(TAG, "onServiceLost: " + NsdServiceInfoToString(service));
-                mContext.show("onServiceLost:" + NsdServiceInfoToString(service));
+                sendNotification("onServiceLost", NsdServiceInfoToJSON(service).toString());
                 removeServerInfo(service);  
             }
             @Override
             public void onDiscoveryStopped(String serviceType) {
-                Log.i(TAG, "onDiscoveryStopped: " + serviceType);
-                mContext.show("onDiscoveryStopped: " + serviceType);
+                sendNotification("onDiscoveryStopped", serviceType);
             }
             @Override
             public void onStartDiscoveryFailed(String serviceType, int errorCode) {
-                Log.e(TAG, "onStartDiscoveryFailed, Error code: " + errorCode);
-                mContext.show("onStartDiscoveryFailed, Error code: " + errorCode);
-
+                sendNotification("onStartDiscoveryFailed", "Error code: " + errorCode);
                 mNsdManager.stopServiceDiscovery(this);
             }
             @Override
             public void onStopDiscoveryFailed(String serviceType, int errorCode) {
-                Log.e(TAG, "onStopDiscoveryFailed, Error code: " + errorCode);
-                mContext.show("onStopDiscoveryFailed, Error code: " + errorCode);
+                sendNotification("onStopDiscoveryFailed", "Error code: " + errorCode);
                 mNsdManager.stopServiceDiscovery(this);
             }
         };
@@ -104,23 +107,14 @@ public class NsdHelper {
             @Override
             public void onResolveFailed(NsdServiceInfo serviceInfo,
                     int errorCode) {
-                Log.e(TAG, "onResolveFailed, Error code: " + errorCode);
-                mContext.show("onResolveFailed, Error code: " + errorCode);
+                sendNotification("onResolveFailed", "Error code: " + errorCode);
             }
             @Override
             public void onServiceResolved(NsdServiceInfo serviceInfo) {
-                Log.d(TAG, "onServiceResolved: " + NsdServiceInfoToString(serviceInfo));
-                mContext.show("onServiceResolved: " + NsdServiceInfoToString(serviceInfo));
+                sendNotification("onServiceResolved", NsdServiceInfoToJSON(serviceInfo).toString());
                 String oldName = serviceInfo.getServiceName();
-//                for(int i=0; i<oldName.length(); i++){
-//                    mContext.show(i + ": " + oldName.charAt(i) + " + " + (short)oldName.charAt(i));                    
-//                }
-//                oldName = "fd\032safifodafel;safj\032espoafejsa;fke";
-//                for(int i=0; i<oldName.length(); i++){
-//                    mContext.show(i + ": " + oldName.charAt(i));                    
-//                }
                 String newName = oldName.replace("\\032", " ");
-                mContext.show("oldName: " + oldName + " * " + "newName: " + newName );
+//                mContext.show("oldName: " + oldName + " * " + "newName: " + newName );
                 serviceInfo.setServiceName(newName);                
                 reWriteServerInfo(serviceInfo);
             }
@@ -131,34 +125,30 @@ public class NsdHelper {
         mRegistrationListener = new NsdManager.RegistrationListener() {
             @Override
             public void onServiceRegistered(NsdServiceInfo NsdServiceInfo) {
-                mServiceName = NsdServiceInfo.getServiceName();
-                Log.d(TAG, "onServiceRegistered: " + NsdServiceInfoToString(NsdServiceInfo));
-                mContext.show("onServiceRegistered: " + NsdServiceInfoToString(NsdServiceInfo));
+//                mServiceName = NsdServiceInfo.getServiceName();
+                sendNotification("onServiceRegistered", NsdServiceInfoToJSON(NsdServiceInfo).toString());
             }
             @Override
             public void onRegistrationFailed(NsdServiceInfo arg0, int arg1) {
-                Log.d(TAG, "onRegistrationFailed: " );
-                mContext.show("onRegistrationFailed: ");
+                sendNotification("onRegistrationFailed", NsdServiceInfoToJSON(arg0).toString());
             }
             @Override
             public void onServiceUnregistered(NsdServiceInfo arg0) {
-                Log.d(TAG, "onServiceUnregistered: " + NsdServiceInfoToString(arg0));
-                mContext.show("onServiceUnregistered: " + NsdServiceInfoToString(arg0));
+                sendNotification("onServiceUnregistered", NsdServiceInfoToJSON(arg0).toString());
             }
             @Override
             public void onUnregistrationFailed(NsdServiceInfo serviceInfo,
                     int errorCode) {
-                Log.d(TAG, "onUnregistrationFailed: ");
-                mContext.show("onUnregistrationFailed: ");
+                sendNotification("onUnregistrationFailed", "Error code: " + errorCode);
             }
         };
     }
 
     private boolean isServiceRegistered = false;
-    public void registerService(int port) {
+    public void registerService(String name, int port) {
         NsdServiceInfo serviceInfo = new NsdServiceInfo();
         serviceInfo.setPort(port);
-        serviceInfo.setServiceName(mServiceName);
+        serviceInfo.setServiceName(name);
         serviceInfo.setServiceType(SERVICE_TYPE);
         mNsdManager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD,
                 mRegistrationListener);
@@ -186,16 +176,17 @@ public class NsdHelper {
         isDiscoverServicesStarted = false;
     }
 
-    private String NsdServiceInfoToString(NsdServiceInfo info){
+    private JSONObject NsdServiceInfoToJSON(NsdServiceInfo info){
         String name = info.getServiceName();
         String type = info.getServiceType();
         InetAddress host = info.getHost();
         int port = info.getPort();
-        StringBuilder sb = new StringBuilder();
-        sb.append("name: " + name + "、");
-        sb.append("type: " + type + "、");
-        sb.append("host: " + ((host == null) ? "null" : host.getHostAddress() + ":" + port));
-        return sb.toString();
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("name", name);
+        map.put("type", type);
+        map.put("host", ((host == null) ? "null" : host.getHostAddress() + ":" + port));
+        JSONObject jsonObj = new JSONObject(map);
+        return jsonObj;
     }
     public void addServerInfo(NsdServiceInfo info) {
         Iterator<NsdServiceInfo> iter = mServerInfoList.iterator();
@@ -209,24 +200,11 @@ public class NsdHelper {
             }
         }
         if (!isExist) {
-//            info.setHost(null);
             mServerInfoList.add(info);
         }
     }
     public void reWriteServerInfo(NsdServiceInfo info) {
-//        Iterator<NsdServiceInfo> iter = mServerInfoList.iterator();
-//        NsdServiceInfo element = null;
-//        boolean isExist = false;
-//        while (iter.hasNext()) {
-//            element = (NsdServiceInfo) iter.next();
-//            if (element.getServiceName().equals(info.getServiceName())) {
-//                isExist = true;
-//                break;
-//            }
-//        }
-//        mContext.show("In function reWriteServerInfo.");
         int index = 0;
-        NsdServiceInfo element;
         boolean isExist = false;
         while(index < mServerInfoList.size()){
             if(mServerInfoList.get(index).getServiceName().equals(info.getServiceName())){
@@ -236,10 +214,8 @@ public class NsdHelper {
             index++;
         }
         if (isExist) {
-//            mContext.show("has Exist");
             mServerInfoList.set(index, info);
         }else{
-//            mContext.show("Not Exist");
             mServerInfoList.add(info);            
         }
     }
@@ -263,14 +239,14 @@ public class NsdHelper {
         Iterator<NsdServiceInfo> iter = mServerInfoList.iterator();
         NsdServiceInfo info;
         int cnt = 1;
-        Log.d(TAG, "==========there are " + mServerInfoList.size() + " elements============");
-        mContext.show("==========there are " + mServerInfoList.size() + " elements============");
+        StringBuffer sb = new StringBuffer();
+        sb.append("========there are " + mServerInfoList.size() + " elements========\n");
         while (iter.hasNext()) {
             info = (NsdServiceInfo) iter.next();
-            Log.d(TAG, cnt + ". " + NsdServiceInfoToString(info));
-            mContext.show(cnt + ". " + NsdServiceInfoToString(info));
+            sb.append(cnt + ". " + NsdServiceInfoToJSON(info) + "\n");
             cnt++;
         }
+        sendNotification("showServerInfo", sb.toString());
     }
 
     private int indexcnt = 0;
@@ -280,11 +256,39 @@ public class NsdHelper {
             if(info.getHost() == null){
                 mNsdManager.resolveService(info, mResolveListener);
             }else{
-                mContext.show("No Need To Resolve.");                
+//                mContext.show("No Need To Resolve.");
+                sendNotification("resolveServerInfo", "No Need To Resolve.");
             }
             indexcnt++;
         }else{
             indexcnt = 0;
         }
+    }
+    
+    public void sendNotification(String type, String msg) {
+//        Log.d(TAG, type + ": " + msg);
+//        mContext.show(type + ": " + msg);
+        Bundle messageBundle = new Bundle();
+        messageBundle.putString("type", type);
+        messageBundle.putString("msg", msg);
+        Message message = new Message();
+        message.setData(messageBundle);
+        mHandler.sendMessage(message);
+    }
+    public void sendNotification(String type, JSONObject jsonObj) {
+        Bundle messageBundle = new Bundle();
+        messageBundle.putString("type", type);
+        messageBundle.putString("msg", jsonObj.toString());
+        Message message = new Message();
+        message.setData(messageBundle);
+        mHandler.sendMessage(message);
+    }
+    public void sendNotification(String type, JSONArray jsonArray) {
+        Bundle messageBundle = new Bundle();
+        messageBundle.putString("type", type);
+        messageBundle.putString("msg", jsonArray.toString());
+        Message message = new Message();
+        message.setData(messageBundle);
+        mHandler.sendMessage(message);
     }
 }

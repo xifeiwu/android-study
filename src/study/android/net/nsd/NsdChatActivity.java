@@ -19,13 +19,21 @@ package study.android.net.nsd;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import study.android.activity.LoggerView;
 import study.android.activity.StudyActivity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+@SuppressLint({ "HandlerLeak", "SimpleDateFormat" }) 
 public class NsdChatActivity extends StudyActivity {
 	NsdHelper mNsdHelper;
 	private LoggerView loggerView;
@@ -38,14 +46,45 @@ public class NsdChatActivity extends StudyActivity {
 		super.onCreate(savedInstanceState);
 		loggerView = new LoggerView(this);
 		setContentView(loggerView);
-
-		mNsdHelper = new NsdHelper(this);
-		mNsdHelper.initializeNsd();
+		initHandler();
+        mNsdHelper = new NsdHelper(this, mHandler);
+        mNsdHelper.initializeNsd();
 	}
 
-	public void show(String message){
-	    loggerView.info(message);
-	}
+    private Handler mHandler;
+    private void initHandler() {
+//        final CallbackContext cbc = callbackContext;
+        try {
+            mHandler = new Handler() {
+                @Override
+                public void handleMessage(Message msg) {
+                    String type = msg.getData().getString("type");
+                    String message = msg.getData().getString("msg");
+
+                    JSONObject data = new JSONObject();
+                    try {
+                        data.put("type", new String(type));
+                        data.put("data", new String(message));
+                    } catch(JSONException e) {
+
+                    }
+                    Log.d(TAG, type + ": " + message);
+                    loggerView.info(type + ": " + message);
+//                    PluginResult result = new PluginResult(PluginResult.Status.OK, data);
+//                    result.setKeepCallback(true);
+//                    cbc.sendPluginResult(result);
+                }
+            };
+//            mConnection = new ChatConnection(mHandler);cordova.getActivity()
+
+        } catch(Exception e) {
+//            callbackContext.error("Error " + e);
+        }
+    }
+    public void show(String msg){
+        loggerView.info(msg);        
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -101,7 +140,7 @@ public class NsdChatActivity extends StudyActivity {
         case START_DISCOVER:
             loggerView.info("开始监控");
             if(null == mNsdHelper){
-                mNsdHelper = new NsdHelper(this);
+                mNsdHelper = new NsdHelper(this, mHandler);
                 mNsdHelper.initializeNsd();            
             }else {
                 mNsdHelper.discoverServices();
@@ -122,9 +161,8 @@ public class NsdChatActivity extends StudyActivity {
             mNsdHelper.resolveServerInfo(); 
             break;
         case REGISTER_SERVICE:
-            String[] props = new String[]{"Platform=HammerHead", "string"};
             loggerView.info("发布服务");
-            mNsdHelper.registerService(8000);
+            mNsdHelper.registerService("nsdchat-android", 8000);
             break;
         case UNREGISTER_SERVICE:
             loggerView.info("注销服务");
