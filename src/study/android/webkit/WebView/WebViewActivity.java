@@ -3,7 +3,7 @@ package study.android.webkit.WebView;
 import java.io.IOException;
 import java.io.InputStream;
 
-import study.android.activity.R;
+import study.android.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;

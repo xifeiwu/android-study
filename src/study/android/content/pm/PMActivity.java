@@ -2,7 +2,7 @@ package study.android.content.pm;
 
 import java.util.List;
 
-import study.android.activity.R;
+import study.android.R;
 
 import android.app.Activity;
 import android.content.ComponentName;

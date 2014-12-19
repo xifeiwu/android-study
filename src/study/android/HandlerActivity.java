@@ -1,4 +1,4 @@
-package study.android.activity;
+package study.android;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

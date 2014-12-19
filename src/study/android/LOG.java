@@ -16,7 +16,7 @@
        specific language governing permissions and limitations
        under the License.
 */
-package study.android.activity;
+package study.android;
 
 import android.util.Log;
 

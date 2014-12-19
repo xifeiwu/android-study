@@ -1,6 +1,6 @@
 package study.android.content.Intent;
 
-import study.android.activity.LOG;
+import study.android.LOG;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;

@@ -25,7 +25,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import study.android.activity.LOG;
+import study.android.LOG;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;

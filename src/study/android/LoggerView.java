@@ -1,4 +1,4 @@
-package study.android.activity;
+package study.android;
 
 import java.util.Vector;
 import java.util.logging.Logger;

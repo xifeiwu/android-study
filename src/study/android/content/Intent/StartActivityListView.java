@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.apache.http.protocol.HTTP;
 
-import study.android.activity.LOG;
-import study.android.activity.R;
+import study.android.LOG;
+import study.android.R;
 
 import android.content.Context;
 import android.content.DialogInterface;

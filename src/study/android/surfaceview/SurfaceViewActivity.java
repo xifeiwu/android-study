@@ -1,6 +1,6 @@
 package study.android.surfaceview;
 
-import study.android.activity.R;
+import study.android.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.ContextMenu;

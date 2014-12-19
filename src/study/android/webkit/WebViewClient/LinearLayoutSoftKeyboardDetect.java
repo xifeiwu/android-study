@@ -18,7 +18,7 @@
 */
 package study.android.webkit.WebViewClient;
 
-import study.android.activity.LOG;
+import study.android.LOG;
 import android.app.Activity;
 import android.content.Context;
 //import android.view.View.MeasureSpec;

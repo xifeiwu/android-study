@@ -1,7 +1,7 @@
 package study.android.webkit.WebViewClient;
 
-import study.android.activity.LOG;
-import study.android.activity.R;
+import study.android.LOG;
+import study.android.R;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;

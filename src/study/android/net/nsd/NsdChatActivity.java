@@ -22,8 +22,8 @@ import java.util.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import study.android.activity.LoggerView;
-import study.android.activity.StudyActivity;
+import study.android.LoggerView;
+import study.android.StudyActivity;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;

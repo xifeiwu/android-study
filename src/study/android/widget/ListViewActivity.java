@@ -2,7 +2,7 @@ package study.android.widget;
 import java.util.ArrayList;   
 import java.util.List;
 
-import study.android.activity.R;
+import study.android.R;
 import android.app.Activity;  
 import android.content.Context;
 import android.os.Bundle;  

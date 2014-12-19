@@ -1,8 +1,8 @@
 package study.android.DebugLog;
 
 import android.os.Bundle;
-import study.android.activity.LoggerView;
-import study.android.activity.StudyActivity;
+import study.android.LoggerView;
+import study.android.StudyActivity;
 
 public class DebugActivity extends StudyActivity{
     private LoggerView loggerView;

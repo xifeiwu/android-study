@@ -1,4 +1,4 @@
-package study.android.activity;
+package study.android;
 
 import android.app.Activity;
 import android.app.AlertDialog;

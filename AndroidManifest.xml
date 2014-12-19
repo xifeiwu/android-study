@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="study.android.activity"
+    package="study.android"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -21,47 +21,47 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="study.android.webkit.WebView.WebViewActivity"
+        <activity android:name=".webkit.WebView.WebViewActivity"
                   android:label="@string/WebViewActivity">
             <intent-filter>
                 <category android:name="android.intent.category.HOME" />  
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter> 
         </activity>
-        <activity android:name="study.android.webkit.WebView.AppFrameworkActivity"
+        <activity android:name=".webkit.WebView.AppFrameworkActivity"
                   android:label="@string/AppFrameworkActivity">
         </activity>
         
-        <activity android:name="study.android.content.pm.PMActivity"
+        <activity android:name=".content.pm.PMActivity"
                   android:label="@string/PMActivity">
         </activity>
-        <activity android:name="study.android.content.pm.PMActivity_ListView"
+        <activity android:name=".content.pm.PMActivity_ListView"
                   android:label="@string/PMActivity">
         </activity>
         
         <activity android:name=".HandlerActivity"
                   android:label="@string/HandlerActivity">
         </activity>
-        <activity android:name="study.android.surfaceview.SurfaceViewActivity"
+        <activity android:name=".surfaceview.SurfaceViewActivity"
                   android:label="@string/SurfaceViewActivity">
         </activity>
-        <activity android:name="study.android.widget.ListViewActivity"
+        <activity android:name=".widget.ListViewActivity"
                   android:label="@string/ListViewActivity">
         </activity>
         <activity android:name="org.apache.cordova.TestCordovaActivity"
                   android:label="@string/TestCordovaActivity">
         </activity>
-        <activity android:name="study.android.webkit.WebViewClient.TestWebViewClient"
+        <activity android:name=".webkit.WebViewClient.TestWebViewClient"
                   android:label="@string/TestWebViewClient">
         </activity>
-        <activity android:name="study.android.content.Intent.StartOtherAppsByIntent"
+        <activity android:name=".content.Intent.StartOtherAppsByIntent"
                   android:label="@string/StartOtherAppsByIntent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.CATEGORY_ALTERNATIVE" />
             </intent-filter>
         </activity>
-        <activity android:name="study.android.content.Intent.ShareActivity">
+        <activity android:name=".content.Intent.ShareActivity">
 		    <intent-filter>
 		        <action android:name="android.intent.action.SEND"/>
 		        <category android:name="android.intent.category.DEFAULT"/>
@@ -69,10 +69,10 @@
 		        <data android:mimeType="image/*"/>
 		    </intent-filter>
         </activity>
-        <activity android:name="study.android.net.nsd.NsdChatActivity"
+        <activity android:name=".net.nsd.NsdChatActivity"
                   android:label="@string/NsdChatActivity">
         </activity>
-        <activity android:name="study.android.DebugLog.DebugActivity"
+        <activity android:name=".DebugLog.DebugActivity"
                   android:label="@string/DebugActivity">
         </activity>
     </application>

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;  
 import java.util.Map;  
 
-import study.android.activity.R;
+import study.android.R;
 import android.app.Activity;  
 import android.app.AlertDialog;
 import android.content.ComponentName;

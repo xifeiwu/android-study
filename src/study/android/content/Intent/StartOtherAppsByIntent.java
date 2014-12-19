@@ -1,8 +1,8 @@
 package study.android.content.Intent;
 
-import study.android.activity.LOG;
-import study.android.activity.MainActivity;
-import study.android.activity.StudyActivity;
+import study.android.LOG;
+import study.android.MainActivity;
+import study.android.StudyActivity;
 import study.android.content.Intent.StartActivityListView.ToDo;
 import android.app.Activity;
 import android.app.AlertDialog;

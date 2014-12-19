@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import study.android.activity.MainActivity;
-import study.android.activity.R;
-import study.android.activity.StudyActivity;
+import study.android.R;
+import study.android.StudyActivity;
+
 import android.app.ProgressDialog;
 import android.content.res.AssetManager;
 import android.os.Bundle;
