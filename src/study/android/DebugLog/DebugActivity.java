@@ -6,12 +6,14 @@ import study.android.StudyActivity;
 
 public class DebugActivity extends StudyActivity{
     private LoggerView loggerView;
+    private DebugFunc debugFunc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         loggerView = new LoggerView(this);
+        debugFunc = new DebugFunc(this);
         this.setContentView(loggerView);
     }
 
@@ -31,7 +33,10 @@ public class DebugActivity extends StudyActivity{
     protected void onResume() {
         // TODO Auto-generated method stub
         super.onResume();
-        loggerView.info("onResule");
+        info("onResume");
     }
 
+    public void info(String info){
+        loggerView.info(info);        
+    }
 }
