@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -19,30 +20,41 @@ import android.view.SurfaceView;
  * @author xifei
  * notice: the value of screenW
  */
-@SuppressLint("ClickableViewAccessibility") public class LoggerView extends SurfaceView implements Callback, Runnable {
+@SuppressLint("ClickableViewAccessibility") 
+public class LoggerView extends SurfaceView implements Callback, Runnable {
     public Logger logger = Logger.getLogger(LoggerView.class.getName());
     private SurfaceHolder sfh;
     private Paint paint;
     private Canvas canvas;
     private Activity mContext;
 
+    public LoggerView(Context context, AttributeSet attrs) {
+        // TODO Auto-generated constructor stub　　
+        super(context, attrs); 
+        mContext = (Activity) context;
+        initLoggerView();
+    }
     public LoggerView(Context context) {
         // TODO Auto-generated constructor stub　　
-        super(context);
+        super(context); 
         mContext = (Activity) context;
+        initLoggerView();
+    }
+    private void initLoggerView(){
+        this.setKeepScreenOn(true);  
+        this.setFocusable(true); 
         sfh = this.getHolder();
-        sfh.addCallback(this);
+        sfh.addCallback(this); 
         paint = new Paint();
         paint.setColor(Color.BLUE);
         paint.setStyle(Paint.Style.FILL);
         paint.setTextSize(20);
         paint.setAntiAlias(true);
-        DisplayMetrics metrics = new DisplayMetrics();        
+        DisplayMetrics metrics = new DisplayMetrics();  
         mContext.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         screenW = metrics.widthPixels;
-        screenH = metrics.heightPixels;
-        
-        this.info("size of DisplayMetrics: " + this.screenW + "*" + this.screenH);
+        screenH = metrics.heightPixels;        
+        this.info("size of DisplayMetrics: " + this.screenW + "*" + this.screenH);        
     }
 
     private int di, dp, dpx, dpy;
@@ -70,7 +82,6 @@ import android.view.SurfaceView;
     private float eventY;
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        event.getX();
         eventY = event.getY();
         switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
@@ -97,7 +108,7 @@ import android.view.SurfaceView;
             }
             break;
         }
-        return true;
+        return super.onTouchEvent(event);
     }
     private void updateOffsetY(){
         int min = (int) (screenH - (vecLength + 1) * paint.getTextSize());
@@ -117,7 +128,7 @@ import android.view.SurfaceView;
         // TODO Auto-generated method stub
         screenW = getWidth();
         screenH = getHeight();
-        this.info("size from surfaceCreated: " + this.screenW + "*" + this.screenH);
+        logger.info(screenW + " * " + screenH);
         flag = true;
         mThread = new Thread(this);
         mThread.start();
@@ -155,12 +166,11 @@ import android.view.SurfaceView;
     private Vector<String> subStrVec = new Vector<String>();
     private Vector<Integer> subPosVec = new Vector<Integer>();
     private int vecLength = 0;
-
+    
     /**
      * 初始化字符串Vector。清空字符串。
-     * @param mainStr: 将要添加的字符串。
      */
-    public void refreshSubVec() {
+    public void clearSubVec() {
         if (subStrVec != null) {
             subStrVec.removeAllElements();
         } else {
@@ -174,6 +184,7 @@ import android.view.SurfaceView;
         // subColor = new Vector<Character>();
         vecLength = 0;
     }
+
     /**
      * 向绘制数组中添加字符串。
      * @param mainStr: 将要添加的字符串。

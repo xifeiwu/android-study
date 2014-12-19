@@ -23,17 +23,12 @@ import android.net.nsd.NsdManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
-
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -48,7 +43,7 @@ public class NsdHelper {
     private final List<NsdServiceInfo> mServerInfoList = new ArrayList<NsdServiceInfo>();
 
 
-    public static final String TAG = "NsdHelper";
+//    public static final String TAG = "NsdHelper";
 //    public String mServiceName = "NsdChat";
     public static final String SERVICE_TYPE = "_http._tcp.";
     private Handler mHandler;

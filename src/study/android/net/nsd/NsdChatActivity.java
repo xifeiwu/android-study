@@ -172,7 +172,7 @@ public class NsdChatActivity extends StudyActivity {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日HH时mm分ss秒");       
             Date curDate = new Date(System.currentTimeMillis());//获取当前时间       
             String curtime = formatter.format(curDate); 
-            loggerView.refreshSubVec();
+            loggerView.clearSubVec();
             loggerView.info(curtime);
             break;
         }

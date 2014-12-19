@@ -10,6 +10,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -19,12 +20,14 @@ public class SurfaceViewActivity extends Activity implements OnClickListener {
     
     private Button leftBtn, rightBtn;  
     private MySurfaceView mysfView;
+    private SurfaceViewActivity instance;
     @Override  
     public void onCreate(Bundle savedInstanceState) {  
         super.onCreate(savedInstanceState);  
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,  
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);  
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        instance = this;
 //        MySurfaceView msfv = new MySurfaceView(this, null);
         setContentView(R.layout.surfaceview);
         leftBtn = (Button) this.findViewById(R.id.leftBtn);  
@@ -49,6 +52,16 @@ public class SurfaceViewActivity extends Activity implements OnClickListener {
         // TODO Auto-generated method stub
         mysfView = (MySurfaceView) this.findViewById(R.id.MySurfaceView);
         registerForContextMenu(mysfView);
+
+        mysfView.setOnLongClickListener(new OnLongClickListener(){
+            @Override
+            public boolean onLongClick(View arg0) {
+                // TODO Auto-generated method stub
+                Toast.makeText(instance, "on long click.", Toast.LENGTH_LONG).show();
+                return false;
+            }
+            
+        });
         super.onResume();
     }
 

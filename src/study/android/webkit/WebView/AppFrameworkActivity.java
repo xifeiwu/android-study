@@ -50,7 +50,8 @@ public class AppFrameworkActivity extends StudyActivity{
               super.handleMessage(msg);
             }
         };
-        wv.loadUrl("http://192.168.160.176:8000/study.html?ios7");
+        String url = "http://192.168.160.176:8000/study.html?ios7";
+        wv.loadUrl(url);
 //        Toast.makeText(this, "http://192.168.160.176:8000/study.html?ios7", Toast.LENGTH_SHORT).show();
     }
 
