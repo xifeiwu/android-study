@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import org.apache.cordova.TestCordovaActivity;
 
+import study.android.DebugLog.DebugActivity;
 import study.android.content.Intent.StartActivityListView;
 import study.android.content.Intent.StartOtherAppsByIntent;
 import study.android.content.Intent.StartActivityListView.ToDo;
@@ -110,6 +111,7 @@ public class MainActivity extends StudyActivity{
         TESTWEBVIEWCLIENT,
         LISTVIEWACTIVITY,
         TESTCORDOVAACTIVITY,
+        DEBUGACTIVITY,
     };
 
     private ActivityInfo[] activityArray = new ActivityInfo[]{
@@ -153,6 +155,10 @@ public class MainActivity extends StudyActivity{
                     ToDo.TESTCORDOVAACTIVITY.ordinal(),
                     "TestCordovaActivity", 
                     "学习Cordova中的方法"),
+            new ActivityInfo(
+                    ToDo.DEBUGACTIVITY.ordinal(),
+                    "DebugActivity", 
+                    "用来输出Debug信息"),
     };
     private OnItemClickListener itmeClickListener = new OnItemClickListener(){
 
@@ -191,6 +197,9 @@ public class MainActivity extends StudyActivity{
                 break;
             case NASCHATACTIVITY:
                 intent = new Intent(mContext, NsdChatActivity.class);
+                break;
+            case DEBUGACTIVITY:
+                intent = new Intent(mContext, DebugActivity.class);
                 break;
             }
             if(null != intent){

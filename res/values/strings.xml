@@ -11,5 +11,6 @@
     <string name="StartOtherAppsByIntent">StartOtherAppsByIntent示例</string>
     <string name="NsdChatActivity">NsdChatActivity示例</string>
     <string name="AppFrameworkActivity">AppFrameworkActivity示例</string>
+    <string name="DebugActivity">DebugActivity示例</string>
 
 </resources>

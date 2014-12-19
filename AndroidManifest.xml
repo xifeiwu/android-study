@@ -72,6 +72,9 @@
         <activity android:name="study.android.net.nsd.NsdChatActivity"
                   android:label="@string/NsdChatActivity">
         </activity>
+        <activity android:name="study.android.DebugLog.DebugActivity"
+                  android:label="@string/DebugActivity">
+        </activity>
     </application>
 
 </manifest>
