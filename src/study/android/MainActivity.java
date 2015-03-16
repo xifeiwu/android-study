@@ -1,5 +1,7 @@
 package study.android;
 
+import ibp.plugin.jmdns.JMDNSActivity;
+
 import java.util.logging.Logger;
 
 import org.apache.cordova.TestCordovaActivity;
@@ -105,6 +107,7 @@ public class MainActivity extends StudyActivity{
         STARTOTHERAPPSBYINTENT,
         PACKAGEMANAGERACTIVITY,
         NASCHATACTIVITY,
+        JMDNSACTIVITY,
         SURFACEVIEWACTIVITY,
         WEBVIEWACTIVITY,
         APPFRAMEWORKACTIVITY,
@@ -131,6 +134,10 @@ public class MainActivity extends StudyActivity{
                     ToDo.NASCHATACTIVITY.ordinal(),
                     "NsdChatActivity", 
                     "基于网络发现功能的文字通讯。"),
+            new ActivityInfo(
+                    ToDo.JMDNSACTIVITY.ordinal(),
+                    "JMDNSActivity", 
+                    "基于Jmdns的网络发现功能。"),
             new ActivityInfo(
                     ToDo.SURFACEVIEWACTIVITY.ordinal(),
                     "SurfaceViewActivity", 
@@ -197,6 +204,9 @@ public class MainActivity extends StudyActivity{
                 break;
             case NASCHATACTIVITY:
                 intent = new Intent(mContext, NsdChatActivity.class);
+                break;
+            case JMDNSACTIVITY:
+                intent = new Intent(mContext, JMDNSActivity.class);
                 break;
             case DEBUGACTIVITY:
                 intent = new Intent(mContext, DebugActivity.class);
