@@ -10,16 +10,24 @@ import java.util.Enumeration;
 
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Message;
 
 public class DebugFunc {
     private DebugActivity mContext;
     public DebugFunc(DebugActivity activity){
         this.mContext = activity;
-        info(getLocalIP());
-        info(getIPByWifiManager());
+//        info(getLocalIP());
+//        info(getIPByWifiManager());
+        testMessage();
     }
     private void info(String info){
         mContext.info(info);
+    }
+    private void testMessage(){
+        Message message = new Message();
+        info("Message what: " + message.what);
+        info("Message arg1: " + message.arg1);
+        info("Message arg2: " + message.arg2);
     }
     //需要权限: <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     private String getIPByWifiManager(){
