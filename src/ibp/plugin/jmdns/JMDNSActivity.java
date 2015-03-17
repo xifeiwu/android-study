@@ -158,7 +158,7 @@ public class JMDNSActivity extends StudyActivity {
             break;
         case RESOLVE_SERVICE:
             loggerView.info("解析服务");
-            //mNsdHelper.resolveServerInfo(); 
+            mNsdHelper.resolveInfoByName("nsdchat-android"); 
             break;
         case REGISTER_SERVICE:
             loggerView.info("发布服务");
