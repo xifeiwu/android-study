@@ -73,6 +73,9 @@
         <activity android:name=".net.nsd.NsdChatActivity"
                   android:label="@string/NsdChatActivity">
         </activity>
+        <activity android:name="ibp.plugin.jmdns.JMDNSActivity"
+                  android:label="@string/JMDNSActivity">
+        </activity>
         <activity android:name=".DebugLog.DebugActivity"
                   android:label="@string/DebugActivity">
         </activity>

@@ -143,7 +143,7 @@ public class JMDNSActivity extends StudyActivity {
                 mNsdHelper = new NsdHelper(this, mHandler);
                 mNsdHelper.initializeNsd();            
             }else {
-                mNsdHelper.discoverServices();
+                mNsdHelper.startDiscovery();
             }
             break;
         case STOP_DISCOVER:
@@ -154,15 +154,15 @@ public class JMDNSActivity extends StudyActivity {
             break;
         case LIST_SERVICE_INFO:
             loggerView.info("服务列表");
-            mNsdHelper.showServerInfo(); 
+            mNsdHelper.showServiceList();
             break;
         case RESOLVE_SERVICE:
             loggerView.info("解析服务");
-            mNsdHelper.resolveServerInfo(); 
+            //mNsdHelper.resolveServerInfo(); 
             break;
         case REGISTER_SERVICE:
             loggerView.info("发布服务");
-            mNsdHelper.registerService("nsdchat-android", 8000);
+            mNsdHelper.registerService("nsdchat-android", 8000, new String[]{"abc"});
             break;
         case UNREGISTER_SERVICE:
             loggerView.info("注销服务");
