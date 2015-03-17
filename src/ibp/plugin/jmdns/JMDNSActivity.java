@@ -162,7 +162,8 @@ public class JMDNSActivity extends StudyActivity {
             break;
         case REGISTER_SERVICE:
             loggerView.info("发布服务");
-            mNsdHelper.registerService("nsdchat-android", 8000, new String[]{"abc"});
+            String[] props = new String[]{"Platform=HammerHead", "string"};
+            mNsdHelper.registerService("nsdchat-android", 8000, props);
             break;
         case UNREGISTER_SERVICE:
             loggerView.info("注销服务");

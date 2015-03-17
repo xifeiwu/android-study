@@ -145,7 +145,7 @@ public class NsdHelper {
         serviceInfo.setPort(port);
         serviceInfo.setServiceName(name);
         serviceInfo.setServiceType(SERVICE_TYPE);
-        serviceInfo.setAttribute("name", "xifei");
+//        serviceInfo.setAttribute("name", "xifei");
         mNsdManager.registerService(serviceInfo, NsdManager.PROTOCOL_DNS_SD,
                 mRegistrationListener);
         isServiceRegistered = true;
@@ -179,7 +179,7 @@ public class NsdHelper {
         int port = info.getPort();
         
         //add for android 5.0
-        Map<String, byte[]> txt = info.getAttributes();
+//        Map<String, byte[]> txt = info.getAttributes();
         
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", name);
@@ -187,7 +187,7 @@ public class NsdHelper {
         map.put("host", ((host == null) ? "null" : host.getHostAddress() + ":" + port));
         
         //add for android 5.0
-        map.put("txt", txt.toString());
+//        map.put("txt", txt.toString());
         
         JSONObject jsonObj = new JSONObject(map);
         return jsonObj;
