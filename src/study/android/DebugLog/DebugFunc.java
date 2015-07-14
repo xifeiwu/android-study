@@ -1,5 +1,9 @@
 package study.android.DebugLog;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -8,9 +12,11 @@ import java.net.UnknownHostException;
 import java.util.Enumeration;
 
 
+import android.content.res.AssetManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Message;
+import android.util.Log;
 
 public class DebugFunc {
     private DebugActivity mContext;
@@ -18,7 +24,11 @@ public class DebugFunc {
         this.mContext = activity;
 //        info(getLocalIP());
 //        info(getIPByWifiManager());
+//        info(activity.getBaseContext().getFilesDir().getAbsolutePath());
+//        mContext.getBaseContext().getFilesDir().getAbsoluteFile();
+//        info(mContext.getFileDir().getAbsolutePath());
         testMessage();
+        info(readFile("index.html"));
     }
     private void info(String info){
         mContext.info(info);
@@ -71,5 +81,46 @@ public class DebugFunc {
             se.printStackTrace();
         }
         return address;
+    }
+
+
+    public String readFile(String location) {
+        return readFile(location, "UTF-8");
+    }
+
+    public String readFile(String location, String encoding) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            AssetManager asm = mContext.getBaseContext().getAssets();
+            BufferedReader br = new BufferedReader(new InputStreamReader(
+                    asm.open(location), encoding));
+            String str = br.readLine();
+            while (str != null) {
+                sb.append(str + "\n");
+                str = br.readLine();
+            }
+            br.close();
+        } catch (IOException e) {
+            Log.w("jxcore-FileManager", "readfile failed");
+            info("jxcore-FileManager: " + "readfile failed");
+            e.printStackTrace();
+            return null;
+        }
+        return sb.toString();
+    }
+
+    public int aproxFileSize(String location) {
+        int size = 0;
+        try {
+            AssetManager asm = mContext.getBaseContext().getAssets();
+            InputStream st = asm.open(location, AssetManager.ACCESS_UNKNOWN);
+            size = st.available();
+            st.close();
+        } catch (IOException e) {
+            Log.w("jxcore-FileManager", "aproxFileSize failed");
+            e.printStackTrace();
+            return 0;
+        }
+        return size;
     }
 }
