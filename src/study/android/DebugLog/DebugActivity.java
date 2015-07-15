@@ -1,10 +1,15 @@
 package study.android.DebugLog;
 
 import android.os.Bundle;
+import android.view.MotionEvent;
+import study.android.LOG;
 import study.android.LoggerView;
 import study.android.StudyActivity;
 
 public class DebugActivity extends StudyActivity{
+    
+    //private String TAG = this.TAG;
+    
     private LoggerView loggerView;
     private DebugFunc debugFunc;
 
@@ -16,6 +21,7 @@ public class DebugActivity extends StudyActivity{
         debugFunc = new DebugFunc(this);
         this.setContentView(loggerView);
     }
+
 
     @Override
     protected void onDestroy() {

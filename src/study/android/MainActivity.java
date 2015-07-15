@@ -35,7 +35,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends StudyActivity{
-    public static String TAG = "StudyAndroid";
+    
+    //public String TAG = StudyActivity.TAG;
+    
     private ListView activityList;
     private MainActivity mContext;
 
@@ -48,9 +50,9 @@ public class MainActivity extends StudyActivity{
         activityList.setAdapter(new arrayAdapter(this, R.layout.main_item, activityArray));
         activityList.setOnItemClickListener(itmeClickListener);
         mContext = this;
-        LOG.setTAG(TAG);
-        LOG.setLogLevel(LOG.INFO);
-        LOG.i(TAG, "onCreate");
+        //LOG.setTAG(TAG);
+        //LOG.setLogLevel(LOG.INFO);
+        LOG.i("MainActivity, onCreate");
         activityStates("onCreate");
     }
 

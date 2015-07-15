@@ -27,7 +27,7 @@ import android.util.Log;
  * See http://developer.android.com/reference/java/util/Formatter.html
  */
 public class LOG {
-    public static String TAG;
+    public static String TAG = "study.android";
 
     public static final int VERBOSE = Log.VERBOSE;
     public static final int DEBUG = Log.DEBUG;
@@ -36,7 +36,7 @@ public class LOG {
     public static final int ERROR = Log.ERROR;
 
     // Current log level
-    public static int LOGLEVEL = Log.ERROR;
+    public static int LOGLEVEL = Log.VERBOSE;
     
     public static void setTAG(String tag){
         TAG = tag;
@@ -76,6 +76,59 @@ public class LOG {
         return (logLevel >= LOGLEVEL);
     }
 
+
+    /**
+     * Verbose log message.
+     *
+     * @param tag
+     * @param s
+     */
+    public static void v(String s) {
+        if (LOG.VERBOSE >= LOGLEVEL) Log.v(TAG, s);
+    }
+
+    /**
+     * Debug log message.
+     *
+     * @param tag
+     * @param s
+     */
+    public static void d(String s) {
+        if (LOG.DEBUG >= LOGLEVEL) Log.d(TAG, s);
+    }
+
+    /**
+     * Info log message.
+     *
+     * @param tag
+     * @param s
+     */
+    public static void i(String s) {
+        if (LOG.INFO >= LOGLEVEL) Log.i(TAG, s);
+    }
+
+    /**
+     * Warning log message.
+     *
+     * @param tag
+     * @param s
+     */
+    public static void w(String s) {
+        if (LOG.WARN >= LOGLEVEL) Log.w(TAG, s);
+    }
+
+    /**
+     * Error log message.
+     *
+     * @param tag
+     * @param s
+     */
+    public static void e(String s) {
+        if (LOG.ERROR >= LOGLEVEL) Log.e(TAG, s);
+    }
+
+    
+    
     /**
      * Verbose log message.
      *

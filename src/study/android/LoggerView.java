@@ -22,7 +22,8 @@ import android.view.SurfaceView;
  */
 @SuppressLint("ClickableViewAccessibility") 
 public class LoggerView extends SurfaceView implements Callback, Runnable {
-    public Logger logger = Logger.getLogger(LoggerView.class.getName());
+        
+    //public Logger logger = Logger.getLogger(LoggerView.class.getName());
     private SurfaceHolder sfh;
     private Paint paint;
     private Canvas canvas;
@@ -83,6 +84,7 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         eventY = event.getY();
+        LOG.v("LoggerView, Action: " + event.getAction());
         switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
             isPressed = true;
@@ -108,7 +110,7 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
             }
             break;
         }
-        return super.onTouchEvent(event);
+        return true;//super.onTouchEvent(event);
     }
     private void updateOffsetY(){
         int min = (int) (screenH - (vecLength + 1) * paint.getTextSize());
@@ -128,7 +130,8 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
         // TODO Auto-generated method stub
         screenW = getWidth();
         screenH = getHeight();
-        logger.info(screenW + " * " + screenH);
+        //logger.info(screenW + " * " + screenH);
+        LOG.v("LoggerView, screen size: " + screenW + " * " + screenH);
         flag = true;
         mThread = new Thread(this);
         mThread.start();

@@ -28,7 +28,8 @@ public class DebugFunc {
 //        mContext.getBaseContext().getFilesDir().getAbsoluteFile();
 //        info(mContext.getFileDir().getAbsolutePath());
         testMessage();
-        info(readFile("index.html"));
+        info(readFile("www/main.js"));
+        info("Size: " + aproxFileSize("www/main.js"));
     }
     private void info(String info){
         mContext.info(info);

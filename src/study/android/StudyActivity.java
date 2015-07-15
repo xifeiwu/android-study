@@ -4,13 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 
 public class StudyActivity extends Activity{
-
+    
     public boolean onKeyDown(int keyCode, KeyEvent event) {//捕捉返回键
         if(keyCode == KeyEvent.KEYCODE_BACK){
             ConfirmExit();//按了返回键，但已经不能返回，则执行退出确认
-            LOG.i(MainActivity.TAG, "KEYCODE_BACK");
+            LOG.i("KEYCODE_BACK");
             return true; 
         }   
         return super.onKeyDown(keyCode, event);   
@@ -52,4 +53,11 @@ public class StudyActivity extends Activity{
         ad.setPositiveButton("是", positiveListener);
         ad.show();
     }
+    
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        // TODO Auto-generated method stub
+//        LOG.v("StudyActivity, Action: " + event.getAction());
+//        return super.onTouchEvent(event);
+//    }
 }
