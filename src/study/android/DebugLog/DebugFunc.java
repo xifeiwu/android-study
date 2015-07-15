@@ -25,11 +25,14 @@ public class DebugFunc {
 //        info(getLocalIP());
 //        info(getIPByWifiManager());
 //        info(activity.getBaseContext().getFilesDir().getAbsolutePath());
-//        mContext.getBaseContext().getFilesDir().getAbsoluteFile();
 //        info(mContext.getFileDir().getAbsolutePath());
         testMessage();
-        info(readFile("www/main.js"));
-        info("Size: " + aproxFileSize("www/main.js"));
+
+        //for jxcore
+        //info(readFile("www/main.js"));
+        //info("Size: " + aproxFileSize("www/main.js"));
+        info(mContext.getCacheDir().toString());
+        info(mContext.getApplicationInfo().sourceDir);
     }
     private void info(String info){
         mContext.info(info);
@@ -84,44 +87,4 @@ public class DebugFunc {
         return address;
     }
 
-
-    public String readFile(String location) {
-        return readFile(location, "UTF-8");
-    }
-
-    public String readFile(String location, String encoding) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            AssetManager asm = mContext.getBaseContext().getAssets();
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    asm.open(location), encoding));
-            String str = br.readLine();
-            while (str != null) {
-                sb.append(str + "\n");
-                str = br.readLine();
-            }
-            br.close();
-        } catch (IOException e) {
-            Log.w("jxcore-FileManager", "readfile failed");
-            info("jxcore-FileManager: " + "readfile failed");
-            e.printStackTrace();
-            return null;
-        }
-        return sb.toString();
-    }
-
-    public int aproxFileSize(String location) {
-        int size = 0;
-        try {
-            AssetManager asm = mContext.getBaseContext().getAssets();
-            InputStream st = asm.open(location, AssetManager.ACCESS_UNKNOWN);
-            size = st.available();
-            st.close();
-        } catch (IOException e) {
-            Log.w("jxcore-FileManager", "aproxFileSize failed");
-            e.printStackTrace();
-            return 0;
-        }
-        return size;
-    }
 }

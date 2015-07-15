@@ -12,13 +12,15 @@ public class DebugActivity extends StudyActivity{
     
     private LoggerView loggerView;
     private DebugFunc debugFunc;
+    private DebugJXcore debugJXcore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         loggerView = new LoggerView(this);
-        debugFunc = new DebugFunc(this);
+        //debugFunc = new DebugFunc(this);
+        debugJXcore = new DebugJXcore(this);
         this.setContentView(loggerView);
     }
 
