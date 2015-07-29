@@ -29,7 +29,7 @@ public class LoggerView extends SurfaceView implements Callback, Runnable {
     private Canvas canvas;
     private Activity mContext;
 
-    public LoggerView(Context context, AttributeSet attrs) {
+    public LoggerView(Context context, AttributeSet attrs){
         // TODO Auto-generated constructor stub　　
         super(context, attrs); 
         mContext = (Activity) context;
